@@ -46,8 +46,8 @@ curl http://127.0.0.1:8787/health
 
 说明：
 
-- 这个后端会直接复用 `/Users/sdragon/PlusAPP/miniprogram/utils/request.js` 里导出的 `mockApi`
-- 所以前端每次改完 `.ts`，最好保持 `npm run dev:mp` 在运行，让编译后的 `.js` 始终最新
+- 当前后端已经内置一份可独立运行的 mock 训练数据
+- 所以无论本地开发还是微信云托管部署，都不再依赖 `PlusAPP` 目录里的编译产物
 - 如果要启用更自然的云端语音，再补 `OPENAI_API_KEY` 即可；不配时，小程序会继续回退到本地音频资源
 
 ## 两种模式

@@ -1,9 +1,9 @@
 import { randomUUID, createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createServer } from "node:http";
-import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { getDayPlan, getQuestionById, getQuestionsByTables, mockApi } from "./mock-api.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 loadEnv(join(__dirname, ".env"));
@@ -22,34 +22,7 @@ const OPENAI_TTS_INSTRUCTIONS =
 const OPENAI_TTS_ENDPOINT = "https://api.openai.com/v1/audio/speech";
 const TTS_CACHE_DIR = join(__dirname, "cache", "tts");
 const sessions = new Map();
-const storageStore = new Map();
-const require = createRequire(import.meta.url);
 mkdirSync(TTS_CACHE_DIR, { recursive: true });
-
-globalThis.wx = {
-  getStorageSync(key) {
-    return deepClone(storageStore.get(key));
-  },
-  setStorageSync(key, value) {
-    storageStore.set(key, deepClone(value));
-  },
-  removeStorageSync(key) {
-    storageStore.delete(key);
-  },
-  request() {
-    throw new Error("wx.request is unavailable in server mockApi mode");
-  },
-  login() {
-    throw new Error("wx.login is unavailable in server mockApi mode");
-  }
-};
-
-const requestModulePath = join(__dirname, "..", "PlusAPP", "miniprogram", "utils", "request.js");
-const questionBankModulePath = join(__dirname, "..", "PlusAPP", "miniprogram", "mock", "question-bank.js");
-const planModulePath = join(__dirname, "..", "PlusAPP", "miniprogram", "mock", "plan.js");
-const { mockApi } = loadMockApi();
-const { getQuestionById, getQuestionsByTables } = loadCompiledModule(questionBankModulePath, "question bank");
-const { getDayPlan } = loadCompiledModule(planModulePath, "day plan");
 
 const tipsByTable = {
   1: "一的口诀最简单，乘几还是几。",
@@ -68,34 +41,6 @@ const systemSpeechText = {
   rewardMatch: "配对完成，做得真棒。"
 };
 const chineseDigits = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
-
-function loadMockApi() {
-  try {
-    const requestModule = require(requestModulePath);
-
-    if (!requestModule.mockApi) {
-      throw new Error("mockApi export not found");
-    }
-
-    return requestModule;
-  } catch (error) {
-    throw new Error(
-      `Failed to load compiled miniprogram mockApi from ${requestModulePath}. ` +
-        `Please run "npm run build:mp" in /Users/sdragon/PlusAPP first.\n${String(error)}`
-    );
-  }
-}
-
-function loadCompiledModule(modulePath, label) {
-  try {
-    return require(modulePath);
-  } catch (error) {
-    throw new Error(
-      `Failed to load compiled miniprogram ${label} from ${modulePath}. ` +
-        `Please run "npm run build:mp" in /Users/sdragon/PlusAPP first.\n${String(error)}`
-    );
-  }
-}
 
 function loadEnv(filePath) {
   if (!existsSync(filePath)) {
@@ -122,14 +67,6 @@ function loadEnv(filePath) {
       process.env[key] = value;
     }
   }
-}
-
-function deepClone(value) {
-  if (value === undefined || value === null) {
-    return value;
-  }
-
-  return JSON.parse(JSON.stringify(value));
 }
 
 function toChineseNumber(value) {
@@ -468,8 +405,8 @@ const server = createServer(async (req, res) => {
           ttsModel: OPENAI_TTS_MODEL,
           ttsVoice: OPENAI_TTS_VOICE,
           ttsFormat: OPENAI_TTS_FORMAT,
-          requestModulePath,
-          hasMockApi: true
+          hasMockApi: true,
+          mockSource: "embedded"
         }
       });
       return;
