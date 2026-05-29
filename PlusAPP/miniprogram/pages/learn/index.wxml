@@ -1,0 +1,73 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在加载口诀内容...</view>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="学习页" tone="sky"></ui-pill>
+          <ui-pill label="今日重点 {{content.targetTables.length}} 组" tone="warm"></ui-pill>
+        </view>
+        <text class="hero-title">{{content.dayTitle}}</text>
+        <text class="hero-subtitle">先看懂是什么意思，再开始跟读和闯关，孩子会轻松很多。</text>
+        <view class="hero-foot">
+          <view class="pill-row">
+            <ui-pill
+              wx:for="{{content.targetTables}}"
+              wx:key="index"
+              label="{{item}} 的口诀"
+              tone="mint"
+            ></ui-pill>
+          </view>
+        </view>
+      </view>
+
+      <ui-panel title="图示理解" subtitle="把乘法先看成重复加法，理解会更扎实。" tone="sky">
+        <view class="formula-stage">
+          <text class="formula-eyebrow">先看题目</text>
+          <text class="formula">{{content.visualExample.formula}}</text>
+          <text class="formula-caption">{{content.visualExample.expressionText}}</text>
+          <view class="dot-groups">
+            <view wx:for="{{visualGroups}}" wx:key="id" wx:for-item="group" class="dot-group">
+              <view wx:for="{{group.dots}}" wx:key="*this" wx:for-item="dotItem" class="dot"></view>
+            </view>
+          </view>
+        </view>
+        <view class="button-row">
+          <button class="ghost-btn ghost-btn-small" bindtap="handleListen" hover-class="button-hover">跟读一遍</button>
+        </view>
+      </ui-panel>
+
+      <ui-panel title="记忆小规律" subtitle="先抓住规律，背起来就不会那么硬。">
+        <view class="tips-list">
+          <view wx:for="{{content.tips}}" wx:key="index" class="tip-row">
+            <view class="tip-bullet"></view>
+            <text class="tip-copy">{{item}}</text>
+          </view>
+        </view>
+      </ui-panel>
+
+      <ui-panel
+        title="今天的口诀卡片"
+        subtitle="像翻卡一样看口诀，孩子更容易一眼记住。"
+        extra="共 {{content.rhymes.length}} 句"
+      >
+        <view class="rhyme-grid">
+          <view wx:for="{{content.rhymes}}" wx:key="id" class="rhyme-card">
+            <text class="rhyme-card-formula">{{item.formula}}</text>
+            <text class="rhyme-card-text">{{item.rhymeText}}</text>
+            <text class="rhyme-card-answer">{{item.answer}}</text>
+          </view>
+        </view>
+      </ui-panel>
+
+      <view class="footer-actions">
+        <button class="primary-btn" bindtap="handleStartGame" hover-class="button-hover">{{primaryButtonText}}</button>
+        <view class="button-row">
+          <button class="ghost-btn ghost-btn-small" bindtap="handleTryMatch" hover-class="button-hover">翻卡片配对</button>
+          <button class="ghost-btn ghost-btn-small" bindtap="handleTryLevel" hover-class="button-hover">走格子闯关</button>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

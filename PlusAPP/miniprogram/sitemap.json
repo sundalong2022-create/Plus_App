@@ -1,0 +1,17 @@
+{
+  "desc": "PlusAPP sitemap config",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "pages/home/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/learn/index"
+    },
+    {
+      "action": "disallow",
+      "page": "*"
+    }
+  ]
+}

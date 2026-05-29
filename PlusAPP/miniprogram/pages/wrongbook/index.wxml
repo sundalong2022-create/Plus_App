@@ -1,0 +1,73 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在整理错题...</view>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="错题本" tone="coral"></ui-pill>
+          <ui-pill label="优先 {{wrongbook.priorityWrongCount}} 题" tone="warm"></ui-pill>
+        </view>
+        <text class="hero-title">把容易忘的题单独拎出来</text>
+        <text class="hero-subtitle">先看最近连错的题，再回头做一遍，通常会记得更稳。</text>
+      </view>
+
+      <view class="summary-grid">
+        <view class="summary-card">
+          <text class="summary-value">{{wrongbook.totalWrongCount}}</text>
+          <text class="summary-label">待复习</text>
+        </view>
+        <view class="summary-card">
+          <text class="summary-value">{{wrongbook.todayWrongCount}}</text>
+          <text class="summary-label">今天新增</text>
+        </view>
+        <view class="summary-card">
+          <text class="summary-value">{{wrongbook.priorityWrongCount}}</text>
+          <text class="summary-label">优先处理</text>
+        </view>
+      </view>
+
+      <ui-empty
+        wx:if="{{wrongbook.totalWrongCount === 0}}"
+        title="暂时没有待复习错题"
+        subtitle="今天这轮练得很稳，可以直接回首页继续下一天。"
+      ></ui-empty>
+
+      <ui-panel
+        wx:for="{{groupCards}}"
+        wx:key="groupKey"
+        title="{{item.groupTitle}}"
+        subtitle="从上到下看一遍，先处理高频错题。"
+        extra="{{item.items.length}} 题"
+      >
+        <view class="list-stack">
+          <view wx:for="{{item.items}}" wx:key="questionId" wx:for-item="wrongItem" class="list-item">
+            <view class="list-item-copy">
+              <view class="task-card-head">
+                <text class="list-item-title">{{wrongItem.formula}}</text>
+                <ui-pill
+                  label="{{wrongItem.severityText}}"
+                  tone="{{wrongItem.severityTone}}"
+                  small="{{true}}"
+                ></ui-pill>
+              </view>
+              <text class="list-item-subtitle">{{wrongItem.metaText}}</text>
+            </view>
+            <view class="list-item-tail">
+              <text class="metric-title">{{wrongItem.answer}}</text>
+            </view>
+          </view>
+        </view>
+      </ui-panel>
+
+      <button
+        wx:if="{{wrongbook.totalWrongCount > 0}}"
+        class="primary-btn"
+        bindtap="handleStartReview"
+        hover-class="button-hover"
+      >
+        开始错题救援
+      </button>
+    </view>
+  </block>
+</view>

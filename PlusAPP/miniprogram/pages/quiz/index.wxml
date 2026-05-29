@@ -1,0 +1,62 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在准备题目...</view>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="第 {{currentIndex + 1}} 题" tone="warm"></ui-pill>
+          <ui-pill label="连对 {{comboCount}}" tone="mint"></ui-pill>
+        </view>
+        <text class="hero-title">快问快答</text>
+        <text class="hero-subtitle">每次只做一小题，越往后越顺手。</text>
+        <view class="hero-progress-row">
+          <text class="hero-progress-label">本轮进度 {{progressPercent}}%</text>
+          <text class="hero-note">答对 {{correctCount}} / {{questions.length}} 题</text>
+        </view>
+        <view class="progress progress-large">
+          <view class="progress-bar" style="width: {{progressPercent}}%;"></view>
+        </view>
+      </view>
+
+      <view class="question-stage">
+        <view class="question-meta">
+          <ui-pill label="{{sourceText}}" tone="{{sourceTone}}" small="{{true}}"></ui-pill>
+          <button class="ghost-btn ghost-btn-small" bindtap="handleListen" hover-class="button-hover">听题</button>
+        </view>
+        <view wx:if="{{showAnswerBadge}}" class="answer-badge-row">
+          <view class="answer-badge answer-badge-{{answerBadgeType}}">{{answerBadgeText}}</view>
+        </view>
+        <text class="question-prompt">选出正确答案</text>
+        <text class="formula">{{currentQuestion.formula}} = ?</text>
+        <view class="answer-grid">
+          <view
+            wx:for="{{currentQuestion.options}}"
+            wx:key="index"
+            class="option-tile {{selectedAnswer === item ? 'option-tile-selected' : ''}}"
+            data-value="{{item}}"
+            bindtap="handleSelect"
+            hover-class="option-hover"
+            hover-stay-time="70"
+          >
+            {{item}}
+          </view>
+        </view>
+
+        <view
+          wx:if="{{feedbackText}}"
+          class="feedback-banner {{feedbackType === 'correct' ? 'feedback-correct' : 'feedback-wrong'}}"
+        >
+          {{feedbackText}}
+        </view>
+      </view>
+
+      <ui-panel title="答题提醒" subtitle="不会也没关系，先猜一猜，再记口诀。">
+        <view class="pill-row">
+          <ui-pill label="新题先理解" tone="warm"></ui-pill>
+          <ui-pill label="错题会回流复习" tone="coral"></ui-pill>
+        </view>
+      </ui-panel>
+    </view>
+  </block>
+</view>

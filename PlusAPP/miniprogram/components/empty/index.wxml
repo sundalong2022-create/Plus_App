@@ -1,0 +1,4 @@
+<view class="empty-block {{compact ? 'empty-block-compact' : ''}}">
+  <text wx:if="{{title}}" class="empty-title">{{title}}</text>
+  <text wx:if="{{subtitle}}" class="empty-subtitle">{{subtitle}}</text>
+</view>

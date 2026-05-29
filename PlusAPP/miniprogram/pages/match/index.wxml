@@ -1,0 +1,45 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在洗牌...</view>
+  <ui-reward-burst
+    wx:if="{{showRewardBurst}}"
+    badge="配对完成"
+    title="做得真棒"
+    subtitle="这一组已经全部找到了"
+    tone="sky"
+  ></ui-reward-burst>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="配对游戏" tone="sky"></ui-pill>
+          <ui-pill label="已配对 {{matchedCount}} / {{totalPairs}} 组" tone="mint"></ui-pill>
+        </view>
+        <text class="hero-title">翻一翻，找到正确搭档</text>
+        <text class="hero-subtitle">先记题目，再记答案，刚学完口诀时特别合适。</text>
+        <view class="hero-progress-row">
+          <text class="hero-progress-label">当前进度 {{progressPercent}}%</text>
+        </view>
+        <view class="progress progress-large">
+          <view class="progress-bar" style="width: {{progressPercent}}%;"></view>
+        </view>
+      </view>
+
+      <ui-panel title="开始配对" subtitle="每次翻开两张，一样的一组就会留下来。">
+        <view class="match-grid">
+          <view
+            wx:for="{{cards}}"
+            wx:key="id"
+            class="match-card {{item.status === 'matched' ? 'match-card-matched' : item.status === 'opened' ? 'match-card-open' : ''}}"
+            data-id="{{item.id}}"
+            bindtap="handleCardTap"
+            hover-class="card-hover"
+            hover-stay-time="70"
+          >
+            <text class="match-card-text">{{item.status === 'closed' ? '?' : item.content}}</text>
+          </view>
+        </view>
+      </ui-panel>
+    </view>
+  </block>
+</view>

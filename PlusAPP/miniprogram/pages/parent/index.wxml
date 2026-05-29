@@ -1,0 +1,81 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在整理学习记录...</view>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="家长看板" tone="sky"></ui-pill>
+          <ui-pill label="连续 {{dashboard.continuousDays}} 天" tone="mint"></ui-pill>
+        </view>
+        <text class="hero-title">先看趋势，再决定明天练什么</text>
+        <text class="hero-subtitle">这里不需要看太多数据，只盯住时长、掌握层次和高频错题就够了。</text>
+      </view>
+
+      <view class="summary-grid">
+        <view class="summary-card">
+          <text class="summary-value">{{dashboard.todayMinutes}}</text>
+          <text class="summary-label">今日分钟</text>
+        </view>
+        <view class="summary-card">
+          <text class="summary-value">{{dashboard.totalMinutes}}</text>
+          <text class="summary-label">累计分钟</text>
+        </view>
+        <view class="summary-card">
+          <text class="summary-value">{{dashboard.continuousDays}}</text>
+          <text class="summary-label">连续天数</text>
+        </view>
+      </view>
+
+      <ui-panel title="口诀掌握情况" subtitle="把孩子当前状态分成三层看，会比总表更清楚。">
+        <view class="metric-grid">
+          <view class="metric-card">
+            <text class="metric-label">已掌握</text>
+            <text class="metric-value">{{masteredCount}} 组</text>
+            <view class="pill-row">
+              <ui-pill wx:for="{{dashboard.masteredTables}}" wx:key="index" label="{{item}}" tone="mint"></ui-pill>
+            </view>
+          </view>
+          <view class="metric-card">
+            <text class="metric-label">学习中</text>
+            <text class="metric-value">{{learningCount}} 组</text>
+            <view class="pill-row">
+              <ui-pill wx:for="{{dashboard.learningTables}}" wx:key="index" label="{{item}}" tone="warm"></ui-pill>
+            </view>
+          </view>
+          <view class="metric-card">
+            <text class="metric-label">薄弱项</text>
+            <text class="metric-value">{{weakCount}} 组</text>
+            <view class="pill-row">
+              <ui-pill wx:for="{{dashboard.weakTables}}" wx:key="index" label="{{item}}" tone="coral"></ui-pill>
+            </view>
+          </view>
+        </view>
+      </ui-panel>
+
+      <ui-panel title="高频错题" subtitle="优先抓重复错的几题，不用一口气全补。">
+        <ui-empty
+          wx:if="{{dashboard.topWrongItems.length === 0}}"
+          title="今天表现很稳"
+          subtitle="暂时没有明显的高频错题。"
+          compact="{{true}}"
+        ></ui-empty>
+        <view wx:else class="list-stack">
+          <view wx:for="{{dashboard.topWrongItems}}" wx:key="formula" class="list-item">
+            <view class="list-item-copy">
+              <text class="list-item-title">{{item.formula}}</text>
+              <text class="list-item-subtitle">建议明天先把这题做成第一题。</text>
+            </view>
+            <view class="list-item-tail">
+              <ui-pill label="错 {{item.wrongCount}} 次" tone="coral" small="{{true}}"></ui-pill>
+            </view>
+          </view>
+        </view>
+      </ui-panel>
+
+      <ui-panel title="明日建议" subtitle="按建议走，家长陪练时会更省力。" tone="warm">
+        <text class="tip-copy">{{dashboard.tomorrowSuggestion}}</text>
+      </ui-panel>
+    </view>
+  </block>
+</view>

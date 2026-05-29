@@ -1,0 +1,136 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在准备今天的训练...</view>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="第{{currentDay}}天" tone="warm"></ui-pill>
+          <ui-pill label="已完成 {{completedDays}} / 7 天" tone="mint"></ui-pill>
+          <ui-pill label="{{authBadgeText}}" tone="{{authBadgeTone}}" small="{{true}}"></ui-pill>
+        </view>
+        <text class="hero-title">口诀小勇士</text>
+        <text class="hero-subtitle">{{dayTitle}}</text>
+        <view class="auth-banner auth-banner-{{authBadgeTone}}">
+          <view class="auth-copy">
+            <text class="auth-banner-title">{{authBadgeText}}</text>
+            <text class="auth-banner-text">{{authMessage}}</text>
+          </view>
+          <button
+            wx:if="{{showRetryLogin}}"
+            class="ghost-btn ghost-btn-small auth-retry-btn"
+            bindtap="handleRetryLogin"
+            hover-class="button-hover"
+            loading="{{retryingLogin}}"
+          >
+            重试连接
+          </button>
+        </view>
+        <view class="hero-progress-row">
+          <text class="hero-progress-label">今天完成度 {{todayProgress}}%</text>
+          <text class="hero-note">{{nextTaskText}}</text>
+        </view>
+        <view class="progress progress-large">
+          <view class="progress-bar" style="width: {{todayProgress}}%;"></view>
+        </view>
+        <view class="hero-foot">
+          <view class="star-strip">
+            <view
+              wx:for="{{starItems}}"
+              wx:key="label"
+              class="star-node {{item.active ? 'star-node-active' : ''}} {{item.current ? 'star-node-current' : ''}} {{item.recent ? 'star-node-recent' : ''}}"
+            >
+              {{item.label}}
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <ui-panel title="7天完成日历" subtitle="每天点亮一格，比单纯打卡更有完成感。" extra="{{completedDays}} / 7">
+        <view class="calendar-row">
+          <view
+            wx:for="{{completionCalendar}}"
+            wx:key="label"
+            class="calendar-node {{item.active ? 'calendar-node-done' : ''}} {{item.current ? 'calendar-node-current' : ''}} {{item.recent ? 'calendar-node-recent' : ''}}"
+          >
+            <text class="calendar-label">{{item.label}}</text>
+            <text class="calendar-value">{{item.value}}</text>
+            <text class="calendar-note">{{item.note}}</text>
+          </view>
+        </view>
+      </ui-panel>
+
+      <ui-panel
+        title="今日任务"
+        subtitle="每天 10 到 15 分钟，轻一点也更容易坚持。"
+        extra="{{todayProgress}}%"
+      >
+        <view class="task-list">
+          <view wx:for="{{taskCards}}" wx:key="id" class="task-card task-card-{{item.statusTone}}">
+            <view class="task-card-row">
+              <view class="task-card-copy">
+                <view class="task-card-head">
+                  <text class="task-card-title">{{item.title}}</text>
+                  <ui-pill label="{{item.statusText}}" tone="{{item.statusTone}}" small="{{true}}"></ui-pill>
+                </view>
+                <text class="task-card-subtitle">{{item.summary}}</text>
+                <text class="task-card-meta">{{item.minutes}}分钟 · {{item.meta}}</text>
+              </view>
+              <button
+                class="ghost-btn ghost-btn-small"
+                size="mini"
+                data-type="{{item.type}}"
+                bindtap="handleTaskTap"
+                hover-class="button-hover"
+              >
+                {{item.actionText}}
+              </button>
+            </view>
+          </view>
+        </view>
+      </ui-panel>
+
+      <button class="primary-btn" bindtap="handleStart" hover-class="button-hover">{{primaryActionText}}</button>
+
+      <ui-panel title="常用入口" subtitle="把复习和家长查看放在手边。">
+        <view class="action-grid">
+          <view
+            wx:for="{{quickActions}}"
+            wx:key="target"
+            class="action-tile action-tile-{{item.tone}}"
+            data-target="{{item.target}}"
+            bindtap="handleTileTap"
+            hover-class="tile-hover"
+            hover-stay-time="80"
+          >
+            <view>
+              <text class="action-tile-title">{{item.title}}</text>
+              <text class="action-tile-subtitle">{{item.subtitle}}</text>
+            </view>
+            <ui-pill label="立即进入" tone="{{item.tone}}" small="{{true}}" outline="{{true}}"></ui-pill>
+          </view>
+        </view>
+      </ui-panel>
+
+      <ui-panel title="小游戏预览" subtitle="正式训练之外，也可以单独玩一小局。">
+        <view class="action-grid">
+          <view
+            wx:for="{{gameActions}}"
+            wx:key="target"
+            class="action-tile action-tile-{{item.tone}}"
+            data-target="{{item.target}}"
+            bindtap="handleTileTap"
+            hover-class="tile-hover"
+            hover-stay-time="80"
+          >
+            <view>
+              <text class="action-tile-title">{{item.title}}</text>
+              <text class="action-tile-subtitle">{{item.subtitle}}</text>
+            </view>
+            <ui-pill label="试玩一下" tone="{{item.tone}}" small="{{true}}" outline="{{true}}"></ui-pill>
+          </view>
+        </view>
+      </ui-panel>
+    </view>
+  </block>
+</view>

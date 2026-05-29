@@ -1,0 +1,53 @@
+.pill {
+  min-height: 48rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.pill-small {
+  min-height: 40rpx;
+  padding: 0 14rpx;
+}
+
+.pill-text {
+  font-size: 24rpx;
+  line-height: 1;
+}
+
+.pill-small .pill-text {
+  font-size: 22rpx;
+}
+
+.pill-neutral {
+  background: #eef1f6;
+  color: #677287;
+}
+
+.pill-warm {
+  background: #ffeed3;
+  color: #9c5a00;
+}
+
+.pill-mint {
+  background: #dbf5eb;
+  color: #0d7a58;
+}
+
+.pill-sky {
+  background: #dfefff;
+  color: #225fa9;
+}
+
+.pill-coral {
+  background: #ffe3dc;
+  color: #af4e3b;
+}
+
+.pill-outline {
+  background: transparent;
+  border: 2rpx solid currentColor;
+}

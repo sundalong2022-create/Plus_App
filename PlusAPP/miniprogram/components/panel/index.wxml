@@ -1,0 +1,18 @@
+<view class="panel panel-{{tone}} {{compact ? 'panel-compact' : ''}}">
+  <view wx:if="{{eyebrow || title || subtitle || extra}}" class="panel-head">
+    <view class="panel-copy">
+      <text wx:if="{{eyebrow}}" class="panel-eyebrow">{{eyebrow}}</text>
+      <text wx:if="{{title}}" class="panel-title">{{title}}</text>
+      <text wx:if="{{subtitle}}" class="panel-subtitle">{{subtitle}}</text>
+    </view>
+    <text wx:if="{{extra}}" class="panel-extra">{{extra}}</text>
+  </view>
+
+  <view class="panel-body">
+    <slot></slot>
+  </view>
+
+  <view wx:if="{{footer}}" class="panel-footer">
+    <text class="panel-footer-text">{{footer}}</text>
+  </view>
+</view>

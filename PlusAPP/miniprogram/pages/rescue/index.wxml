@@ -1,0 +1,60 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在准备救援任务...</view>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="错题救援" tone="coral"></ui-pill>
+          <ui-pill label="已救回 {{rescuedCount}} / {{wrongItems.length}} 题" tone="mint"></ui-pill>
+        </view>
+        <text class="hero-title">把最近没记牢的题补回来</text>
+        <text class="hero-subtitle">错题不用一次全做完，优先把最近连错的几题救回来就够了。</text>
+        <view class="hero-progress-row">
+          <text class="hero-progress-label">本轮进度 {{progressPercent}}%</text>
+        </view>
+        <view class="progress progress-large">
+          <view class="progress-bar" style="width: {{progressPercent}}%;"></view>
+        </view>
+      </view>
+
+      <ui-empty
+        wx:if="{{wrongItems.length === 0}}"
+        title="当前没有需要救援的错题"
+        subtitle="这一轮已经补得差不多了，可以回首页继续学习。"
+      ></ui-empty>
+
+      <view wx:else class="question-stage">
+        <view class="question-meta">
+          <ui-pill label="优先错题" tone="coral" small="{{true}}"></ui-pill>
+          <button class="ghost-btn ghost-btn-small" bindtap="handleListen" hover-class="button-hover">听题</button>
+        </view>
+        <view wx:if="{{showAnswerBadge}}" class="answer-badge-row">
+          <view class="answer-badge answer-badge-{{answerBadgeType}}">{{answerBadgeText}}</view>
+        </view>
+        <text class="question-prompt">答对就能救回一题</text>
+        <text class="formula">{{currentQuestion.formula}} = ?</text>
+        <view class="answer-grid">
+          <view
+            wx:for="{{currentQuestion.options}}"
+            wx:key="index"
+            class="option-tile"
+            data-value="{{item}}"
+            bindtap="handleSelect"
+            hover-class="option-hover"
+            hover-stay-time="70"
+          >
+            {{item}}
+          </view>
+        </view>
+        <view
+          wx:if="{{feedbackText}}"
+          class="feedback-banner {{feedbackText.indexOf('救回') > -1 ? 'feedback-correct' : 'feedback-wrong'}}"
+        >
+          {{feedbackText}}
+        </view>
+        <view wx:if="{{explainText}}" class="feedback-banner feedback-soft">{{explainText}}</view>
+      </view>
+    </view>
+  </block>
+</view>

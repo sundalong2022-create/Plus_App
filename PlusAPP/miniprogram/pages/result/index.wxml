@@ -1,0 +1,88 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在生成结果...</view>
+  <ui-reward-burst
+    wx:if="{{showRewardBurst}}"
+    badge="{{result.reward.title}}"
+    title="太棒了"
+    subtitle="这一轮训练已经完成"
+    tone="{{performanceTone}}"
+  ></ui-reward-burst>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="{{performanceBadge}}" tone="{{performanceTone}}"></ui-pill>
+          <ui-pill label="{{result.reward.title}}" tone="sky"></ui-pill>
+        </view>
+        <text class="hero-title">这轮训练完成了</text>
+        <text class="hero-subtitle">{{summaryMessage}}</text>
+      </view>
+
+      <view class="summary-grid">
+        <view class="summary-card">
+          <text class="summary-value">{{accuracyPercent}}%</text>
+          <text class="summary-label">正确率</text>
+        </view>
+        <view class="summary-card">
+          <text class="summary-value">{{result.correctCount}} / {{result.totalQuestions}}</text>
+          <text class="summary-label">答对题数</text>
+        </view>
+        <view class="summary-card">
+          <text class="summary-value">{{result.elapsedSeconds}}</text>
+          <text class="summary-label">本次秒数</text>
+        </view>
+      </view>
+
+      <ui-panel title="完成日历已点亮" subtitle="这一步做完，7天主线会更有推进感。" extra="{{completedDays}} / 7">
+        <view class="calendar-row">
+          <view
+            wx:for="{{completionCalendar}}"
+            wx:key="label"
+            class="calendar-node {{item.active ? 'calendar-node-done' : ''}} {{item.current ? 'calendar-node-current' : ''}} {{item.recent ? 'calendar-node-recent' : ''}}"
+          >
+            <text class="calendar-label">{{item.label}}</text>
+            <text class="calendar-value">{{item.value}}</text>
+            <text class="calendar-note">{{item.note}}</text>
+          </view>
+        </view>
+      </ui-panel>
+
+      <ui-panel title="这次新掌握的题" subtitle="这些题已经开始顺起来了。">
+        <view wx:if="{{result.newMasteredItems.length}}" class="pill-row">
+          <ui-pill wx:for="{{result.newMasteredItems}}" wx:key="index" label="{{item}}" tone="mint"></ui-pill>
+        </view>
+        <ui-empty
+          wx:else
+          title="这次先建立印象"
+          subtitle="先把题目看熟，下一轮掌握会更明显。"
+          compact="{{true}}"
+        ></ui-empty>
+      </ui-panel>
+
+      <ui-panel title="待加强的题" subtitle="把这几题单独再看一遍，记忆会更牢。">
+        <view wx:if="{{result.weakItems.length}}" class="pill-row">
+          <ui-pill wx:for="{{result.weakItems}}" wx:key="index" label="{{item}}" tone="coral"></ui-pill>
+        </view>
+        <ui-empty
+          wx:else
+          title="没有新增错题"
+          subtitle="这一轮表现很稳，可以直接回首页开始下一天。"
+          compact="{{true}}"
+        ></ui-empty>
+      </ui-panel>
+
+      <view class="footer-actions">
+        <button
+          wx:if="{{result.nextAction === 'wrongReview'}}"
+          class="primary-btn"
+          bindtap="handleOpenRescue"
+          hover-class="button-hover"
+        >
+          继续复习错题
+        </button>
+        <button class="secondary-btn" bindtap="handleGoHome" hover-class="button-hover">返回首页</button>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,15 @@
+{
+  "name": "plusapp",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build:mp": "node scripts/build-miniprogram-js.mjs",
+    "dev:mp": "node scripts/build-miniprogram-js.mjs --watch",
+    "generate:icons": "node scripts/generate-tab-icons.mjs",
+    "generate:audio": "node scripts/generate-audio-assets.mjs",
+    "generate:assets": "npm run generate:icons && npm run generate:audio"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/learn/index",
+    "pages/quiz/index",
+    "pages/match/index",
+    "pages/level/index",
+    "pages/rescue/index",
+    "pages/result/index",
+    "pages/wrongbook/index",
+    "pages/parent/index",
+    "pages/dev-config/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "PlusAPP",
+    "navigationBarBackgroundColor": "#F9FBFF",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F4F7FB",
+    "backgroundTextStyle": "light"
+  },
+  "usingComponents": {
+    "ui-panel": "/components/panel/index",
+    "ui-pill": "/components/pill/index",
+    "ui-empty": "/components/empty/index",
+    "ui-reward-burst": "/components/reward-burst/index"
+  },
+  "tabBar": {
+    "color": "#7B8294",
+    "selectedColor": "#0E8D69",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home_active.png"
+      },
+      {
+        "pagePath": "pages/wrongbook/index",
+        "text": "错题本",
+        "iconPath": "assets/tabbar/wrongbook.png",
+        "selectedIconPath": "assets/tabbar/wrongbook_active.png"
+      },
+      {
+        "pagePath": "pages/parent/index",
+        "text": "家长看板",
+        "iconPath": "assets/tabbar/parent.png",
+        "selectedIconPath": "assets/tabbar/parent_active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

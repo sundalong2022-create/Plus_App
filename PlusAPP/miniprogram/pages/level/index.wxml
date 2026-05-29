@@ -1,0 +1,66 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">正在搭建关卡...</view>
+
+  <block wx:else>
+    <view class="section-stack">
+      <view class="hero-banner">
+        <view class="hero-top">
+          <ui-pill label="闯关模式" tone="mint"></ui-pill>
+          <ui-pill label="第 {{currentIndex + 1}} 步" tone="warm"></ui-pill>
+        </view>
+        <text class="hero-title">答对前进，到终点就过关</text>
+        <text class="hero-subtitle">走到最后一格，就表示今天这轮主练习完成了。</text>
+        <view class="hero-progress-row">
+          <text class="hero-progress-label">本轮进度 {{progressPercent}}%</text>
+          <text class="hero-note">已前进 {{currentStep}} 步</text>
+        </view>
+        <view class="progress progress-large">
+          <view class="progress-bar" style="width: {{progressPercent}}%;"></view>
+        </view>
+      </view>
+
+      <ui-panel title="关卡路线" subtitle="答对一题就向前走一步。">
+        <view class="track-row" style="{{trackTemplateStyle}}">
+          <view
+            wx:for="{{trackCells}}"
+            wx:key="label"
+            class="track-step {{item.active ? 'track-step-active' : ''}} {{item.current ? 'track-step-current' : ''}}"
+          >
+            {{item.label}}
+          </view>
+        </view>
+      </ui-panel>
+
+      <view class="question-stage">
+        <view class="question-meta">
+          <ui-pill label="当前题" tone="sky" small="{{true}}"></ui-pill>
+          <button class="ghost-btn ghost-btn-small" bindtap="handleListen" hover-class="button-hover">听题</button>
+        </view>
+        <view wx:if="{{showAnswerBadge}}" class="answer-badge-row">
+          <view class="answer-badge answer-badge-{{answerBadgeType}}">{{answerBadgeText}}</view>
+        </view>
+        <text class="question-prompt">答对才能前进</text>
+        <text class="formula">{{currentQuestion.formula}} = ?</text>
+        <view class="answer-grid">
+          <view
+            wx:for="{{currentQuestion.options}}"
+            wx:key="index"
+            class="option-tile"
+            data-value="{{item}}"
+            bindtap="handleSelect"
+            hover-class="option-hover"
+            hover-stay-time="70"
+          >
+            {{item}}
+          </view>
+        </view>
+        <view
+          wx:if="{{feedbackText}}"
+          class="feedback-banner {{feedbackText.indexOf('前进一步') > -1 ? 'feedback-correct' : 'feedback-wrong'}}"
+        >
+          {{feedbackText}}
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

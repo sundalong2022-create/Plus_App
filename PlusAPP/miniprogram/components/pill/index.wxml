@@ -1,0 +1,3 @@
+<view class="pill pill-{{tone}} {{small ? 'pill-small' : ''}} {{outline ? 'pill-outline' : ''}}">
+  <text class="pill-text">{{label}}</text>
+</view>

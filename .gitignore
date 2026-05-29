@@ -1,0 +1,9 @@
+.DS_Store
+
+PlusAPP/node_modules/
+PlusAPP/tmp/
+PlusAPP/project.private.config.json
+
+PlusAPP-server/.env
+PlusAPP-server/node_modules/
+PlusAPP-server/cache/

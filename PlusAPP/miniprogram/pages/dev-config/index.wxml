@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="section-stack">
+    <ui-panel title="接口地址" subtitle="开发者工具可以用本机地址，真机联调要换成公网 HTTPS 地址。">
+      <view class="config-stack">
+        <view class="config-block">
+          <text class="config-label">当前生效地址</text>
+          <text class="config-value">{{activeBaseUrl}}</text>
+        </view>
+        <view class="config-block">
+          <text class="config-label">输入新的接口地址</text>
+          <input
+            class="config-input"
+            value="{{inputValue}}"
+            bindinput="handleInput"
+            placeholder="例如 https://api.example.com"
+          />
+          <text class="config-note">默认地址：{{defaultBaseUrl}}</text>
+        </view>
+        <view class="config-button-row">
+          <button class="primary-btn" bindtap="handleSave" hover-class="button-hover">保存地址</button>
+          <button class="ghost-btn" bindtap="handleUseLocalhost" hover-class="button-hover">使用本机地址</button>
+        </view>
+        <view class="config-button-row">
+          <button class="secondary-btn" bindtap="handleTestConnection" hover-class="button-hover" loading="{{testing}}">测试连接</button>
+          <button class="ghost-btn" bindtap="handleReset" hover-class="button-hover">恢复默认</button>
+        </view>
+      </view>
+    </ui-panel>
+
+    <ui-panel title="连接状态" subtitle="建议先测试 /health，再回首页重试登录。">
+      <view class="status-card status-card-{{healthStatusTone}}">
+        <text class="status-title">{{healthStatusText}}</text>
+        <text class="status-copy">{{healthDetailText}}</text>
+      </view>
+    </ui-panel>
+
+    <ui-panel title="真机联调提醒" subtitle="手机上不能访问你电脑的 127.0.0.1。">
+      <view class="config-tips">
+        <text class="config-tip-item">1. 开发者工具联调可继续使用 {{defaultBaseUrl}}</text>
+        <text class="config-tip-item">2. 真机调试请换成公网 HTTPS 域名</text>
+        <text class="config-tip-item">3. 然后到微信小程序后台配置合法域名</text>
+      </view>
+    </ui-panel>
+  </view>
+</view>

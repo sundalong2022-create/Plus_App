@@ -1,0 +1,15 @@
+<view class="reward-mask">
+  <view class="reward-burst reward-{{tone}}">
+    <view class="reward-orbit reward-orbit-1"></view>
+    <view class="reward-orbit reward-orbit-2"></view>
+    <view class="reward-orbit reward-orbit-3"></view>
+    <view class="reward-orbit reward-orbit-4"></view>
+    <view class="reward-orbit reward-orbit-5"></view>
+    <view class="reward-orbit reward-orbit-6"></view>
+    <view class="reward-card">
+      <text class="reward-badge">{{badge}}</text>
+      <text class="reward-title">{{title}}</text>
+      <text wx:if="{{subtitle}}" class="reward-subtitle">{{subtitle}}</text>
+    </view>
+  </view>
+</view>

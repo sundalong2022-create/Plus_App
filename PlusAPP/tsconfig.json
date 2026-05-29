@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "moduleResolution": "Node",
+    "lib": ["ES2020", "DOM"],
+    "skipLibCheck": true,
+    "baseUrl": "."
+  },
+  "include": ["miniprogram/**/*.ts", "miniprogram/**/*.d.ts"]
+}
