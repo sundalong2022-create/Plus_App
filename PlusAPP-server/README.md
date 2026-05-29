@@ -187,3 +187,25 @@ http://127.0.0.1:8787
 
 - 真机要用云端 TTS，接口地址必须是公网 `HTTPS`
 - `127.0.0.1` 只适合本机开发者工具
+
+## 微信云托管部署
+
+如果你使用微信云托管部署当前后端，请选择：
+
+- 代码目录：`PlusAPP-server`
+- Dockerfile 路径：`PlusAPP-server/Dockerfile`
+
+当前镜像会：
+
+1. 使用 Node 20
+2. 执行 `npm install --omit=dev`
+3. 运行 `npm start`
+4. 监听云托管注入的 `PORT`，默认容器端口为 `8080`
+
+推荐在云托管环境变量里配置：
+
+```text
+WECHAT_LOGIN_MODE=live
+WECHAT_APP_ID=你的AppID
+WECHAT_APP_SECRET=你的新AppSecret
+```
