@@ -2,8 +2,9 @@
   "name": "plusapp-server",
   "private": true,
   "type": "module",
+  "main": "index.js",
   "scripts": {
-    "dev": "node server.mjs",
-    "start": "node server.mjs"
+    "dev": "node scripts/local-server.mjs",
+    "start": "node scripts/local-server.mjs"
   }
 }

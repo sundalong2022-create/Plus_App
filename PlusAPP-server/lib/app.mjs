@@ -1,14 +1,12 @@
 import { randomUUID, createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { createServer } from "node:http";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { getDayPlan, getQuestionById, getQuestionsByTables, mockApi } from "./mock-api.mjs";
+import { getDayPlan, getQuestionById, getQuestionsByTables, mockApi } from "../mock-api.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-loadEnv(join(__dirname, ".env"));
+loadEnv(join(__dirname, "..", ".env"));
 
-const PORT = Number(process.env.PORT || 8787);
 const LOGIN_MODE = process.env.WECHAT_LOGIN_MODE === "live" ? "live" : "mock";
 const APP_ID = process.env.WECHAT_APP_ID || "";
 const APP_SECRET = process.env.WECHAT_APP_SECRET || "";
@@ -20,8 +18,9 @@ const OPENAI_TTS_INSTRUCTIONS =
   process.env.OPENAI_TTS_INSTRUCTIONS ||
   "请用自然、温柔、适合一年级小学生的普通话朗读，语速稍慢一点，吐字清楚，语气鼓励但不要太夸张。";
 const OPENAI_TTS_ENDPOINT = "https://api.openai.com/v1/audio/speech";
-const TTS_CACHE_DIR = join(__dirname, "cache", "tts");
+const TTS_CACHE_DIR = join(process.env.TTS_CACHE_DIR || "/tmp", "plusapp-tts");
 const sessions = new Map();
+
 mkdirSync(TTS_CACHE_DIR, { recursive: true });
 
 const tipsByTable = {
@@ -36,10 +35,12 @@ const tipsByTable = {
   9: "九的口诀里，很多答案的数位和等于九。",
   10: "十乘几，结果后面常常直接加零。"
 };
+
 const systemSpeechText = {
   rewardComplete: "太棒了，完成啦。今天又进步了一点。",
   rewardMatch: "配对完成，做得真棒。"
 };
+
 const chineseDigits = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
 
 function loadEnv(filePath) {
@@ -377,7 +378,7 @@ function createAppSession(loginResult) {
   return session;
 }
 
-const server = createServer(async (req, res) => {
+export async function handleRequest(req, res) {
   if (!req.url) {
     sendJson(res, 400, { ok: false, error: { message: "Missing request url" } });
     return;
@@ -392,13 +393,25 @@ const server = createServer(async (req, res) => {
   const { pathname } = requestUrl;
 
   try {
+    if (req.method === "GET" && pathname === "/") {
+      sendJson(res, 200, {
+        ok: true,
+        data: {
+          service: "plusapp-server",
+          status: "running",
+          mode: LOGIN_MODE
+        }
+      });
+      return;
+    }
+
     if (req.method === "GET" && pathname === "/health") {
       sendJson(res, 200, {
         ok: true,
         data: {
           service: "plusapp-server",
           mode: LOGIN_MODE,
-          port: PORT,
+          port: Number(process.env.PORT || 0),
           hasAppId: Boolean(APP_ID),
           hasAppSecret: Boolean(APP_SECRET),
           hasOpenAiKey: Boolean(OPENAI_API_KEY),
@@ -590,8 +603,4 @@ const server = createServer(async (req, res) => {
       }
     });
   }
-});
-
-server.listen(PORT, () => {
-  console.log(`PlusAPP server running at http://127.0.0.1:${PORT} (${LOGIN_MODE})`);
-});
+}

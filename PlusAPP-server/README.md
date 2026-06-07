@@ -209,3 +209,24 @@ WECHAT_LOGIN_MODE=live
 WECHAT_APP_ID=你的AppID
 WECHAT_APP_SECRET=你的新AppSecret
 ```
+
+## Vercel 部署
+
+当前后端也支持部署到 Vercel。
+
+推荐目录：
+
+- 项目根目录：`PlusAPP-server`
+
+Vercel 入口：
+
+- 根入口：`index.js`
+- 共享处理逻辑：`lib/app.mjs`
+- 兼容入口：`api/index.mjs`
+- 路由转发配置：`vercel.json`
+
+本地运行仍然使用：
+
+```bash
+npm run dev
+```
