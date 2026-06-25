@@ -7,7 +7,7 @@ function sendHtml(res, statusCode, body) {
   res.end(body);
 }
 
-function renderLayout({ title, content, bodyClass = "" }) {
+function renderLayout({ title, content, bodyClass = "", script = "" }) {
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -374,6 +374,126 @@ function renderLayout({ title, content, bodyClass = "" }) {
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 18px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .check-card .btn {
+      margin-top: auto;
+    }
+    .demo-shell {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .demo-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .demo-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .demo-tab.is-active {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+    .demo-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(260px, 320px);
+      gap: 16px;
+    }
+    .demo-main,
+    .demo-preview {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+    }
+    .demo-kicker {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--sky);
+      color: #2251cc;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .demo-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .demo-progress {
+      height: 10px;
+      border-radius: 999px;
+      background: #e9f0fb;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .demo-progress-bar {
+      width: 32%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #6ec3ff 0%, #3e78ff 100%);
+      transition: width .24s ease;
+    }
+    .demo-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .mini-tile {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      padding: 12px;
+    }
+    .mini-tile span {
+      display: block;
+      font-size: 12px;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .mini-tile strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .demo-preview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .demo-preview-card {
+      display: grid;
+      gap: 10px;
+    }
+    .demo-item {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+      color: var(--text);
+      font-size: 14px;
     }
     .code-block {
       padding: 14px 16px;
@@ -402,10 +522,12 @@ function renderLayout({ title, content, bodyClass = "" }) {
       .hero,
       .grid,
       .route-grid,
-      .checklist {
+      .checklist,
+      .demo-content {
         grid-template-columns: 1fr;
       }
       .hero-points,
+      .demo-mini-grid,
       .stats {
         grid-template-columns: 1fr 1fr;
       }
@@ -430,6 +552,7 @@ function renderLayout({ title, content, bodyClass = "" }) {
         padding: 20px;
       }
       .hero-points,
+      .demo-mini-grid,
       .stats {
         grid-template-columns: 1fr;
       }
@@ -458,6 +581,7 @@ function renderLayout({ title, content, bodyClass = "" }) {
     </header>
     ${content}
   </main>
+  <script>${script}</script>
 </body>
 </html>`;
 }
@@ -472,7 +596,7 @@ function renderHomePage() {
         <h1>把乘法口诀练成每天愿意打开的 10 分钟小习惯。</h1>
         <p>面向一年级小朋友的乘法口诀训练产品，把新口诀学习、闯关答题、错题救援、奖励反馈和家长看板连成一条轻量主线。孩子不会被内容淹没，家长也不用盯很多复杂数据。</p>
         <div class="actions">
-          <a class="btn primary" href="/guide">体验指引</a>
+          <a class="btn primary" href="#demo">立即试玩</a>
           <a class="btn" href="/docs">查看接口文档</a>
           <a class="btn ghost" href="/health">服务状态</a>
         </div>
@@ -605,23 +729,62 @@ function renderHomePage() {
         </div>
       </div>
       <div class="checklist">
-        <div class="check-card">
+        <button class="check-card demo-launch" type="button" data-panel="learn">
           <span class="label sky">家长 / 访客</span>
           <h3>先看体验流程</h3>
           <p>了解 7 天主线、小游戏训练、家长看板和错题救援这条完整学习路径。</p>
-          <a class="btn" href="/guide">打开体验指引</a>
-        </div>
-        <div class="check-card">
+          <span class="btn">打开演示</span>
+        </button>
+        <button class="check-card demo-launch" type="button" data-panel="level">
           <span class="label mint">开发联调</span>
           <h3>直接看接口入口</h3>
           <p>查看健康检查、登录接口和训练相关接口路径，便于小程序或服务端联调。</p>
-          <a class="btn" href="/docs">打开接口文档</a>
-        </div>
-        <div class="check-card">
+          <span class="btn">打开演示</span>
+        </button>
+        <button class="check-card demo-launch" type="button" data-panel="parent">
           <span class="label warm">线上状态</span>
           <h3>确认服务是否可用</h3>
           <p>站点首页是给人看的，健康检查是给联调和排查看的，两条线分开更清楚。</p>
-          <a class="btn" href="/health">查看服务状态</a>
+          <span class="btn">打开演示</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="section-head">
+        <div>
+          <h2>在线演示台</h2>
+          <p>点一下，页面会真的换内容，不再只是标题展示。</p>
+        </div>
+      </div>
+      <div class="demo-shell">
+        <div class="demo-tabs" role="tablist" aria-label="demo modes">
+          <button class="demo-tab is-active" type="button" data-panel="learn">口诀学习</button>
+          <button class="demo-tab" type="button" data-panel="level">走格子闯关</button>
+          <button class="demo-tab" type="button" data-panel="wrongbook">错题救援</button>
+          <button class="demo-tab" type="button" data-panel="parent">家长看板</button>
+        </div>
+        <div class="demo-content">
+          <div class="demo-main">
+            <div class="demo-kicker" id="demoKicker">口诀学习</div>
+            <h3 id="demoTitle">先看懂，再跟读，再开始练习</h3>
+            <p id="demoDesc">把乘法先讲成重复加法，再用口诀卡片和慢速语音帮助孩子形成初记忆。</p>
+            <div class="demo-actions">
+              <button class="btn primary" type="button" id="demoPrimary">开始体验</button>
+              <button class="btn" type="button" id="demoSecondary">下一步</button>
+            </div>
+            <div class="demo-progress">
+              <div class="demo-progress-bar" id="demoBar"></div>
+            </div>
+            <div class="demo-mini-grid" id="demoMiniGrid"></div>
+          </div>
+          <aside class="demo-preview">
+            <div class="demo-preview-top">
+              <span id="demoPreviewLabel">今日完成度</span>
+              <span class="pill" id="demoBadge">72%</span>
+            </div>
+            <div class="demo-preview-card" id="demoPreviewCard"></div>
+          </aside>
         </div>
       </div>
     </section>
@@ -654,7 +817,136 @@ function renderHomePage() {
     </section>
 
     <p class="footer">PlusAPP 站点首页用于产品展示，微信小程序前端仍在微信运行环境中使用。</p>`,
-    bodyClass: "home"
+    bodyClass: "home",
+    script: `
+      (function () {
+        const panels = {
+          learn: {
+            kicker: "口诀学习",
+            title: "先看懂，再跟读，再开始练习",
+            desc: "把乘法先讲成重复加法，再用口诀卡片和慢速语音帮助孩子形成初记忆。",
+            badge: "今天先学新口诀",
+            progress: 32,
+            primary: "开始学习",
+            secondary: "试听语音",
+            previewLabel: "今日任务",
+            preview: [
+              "看图示理解",
+              "慢速跟读",
+              "翻卡记忆",
+              "完成首轮热身"
+            ]
+          },
+          level: {
+            kicker: "走格子闯关",
+            title: "边答题，边推进地图，做完就能看到终点",
+            desc: "把练习拆成一小步一小步，孩子会更有推进感，也更容易坚持下去。",
+            badge: "主任务进行中",
+            progress: 68,
+            primary: "继续闯关",
+            secondary: "重玩这一关",
+            previewLabel: "闯关进度",
+            preview: [
+              "当前格：第 4 格",
+              "已答对 8 题",
+              "奖励进度 70%",
+              "离终点还有 3 步"
+            ]
+          },
+          wrongbook: {
+            kicker: "错题救援",
+            title: "优先把最近连错的几题救回来",
+            desc: "错题不会一次压给孩子，而是按最近反复出错的题目优先回流复习。",
+            badge: "2 题待救援",
+            progress: 84,
+            primary: "开始救援",
+            secondary: "查看错题本",
+            previewLabel: "高频错题",
+            preview: [
+              "3 × 6 = ?",
+              "4 × 7 = ?",
+              "今天先补这 2 题",
+              "明天再复习一轮"
+            ]
+          },
+          parent: {
+            kicker: "家长看板",
+            title: "先看趋势，再决定明天练什么",
+            desc: "家长不需要看太多数据，只盯住时长、掌握层次和高频错题就够了。",
+            badge: "连续 7 天",
+            progress: 92,
+            primary: "查看看板",
+            secondary: "打开体验指引",
+            previewLabel: "今日状态",
+            preview: [
+              "今日 12 分钟",
+              "已掌握 4 组",
+              "学习中 2 组",
+              "薄弱项 1 组"
+            ]
+          }
+        };
+
+        const tabs = Array.from(document.querySelectorAll(".demo-tab"));
+        const launches = Array.from(document.querySelectorAll(".demo-launch"));
+        const miniGrid = document.getElementById("demoMiniGrid");
+        const kicker = document.getElementById("demoKicker");
+        const title = document.getElementById("demoTitle");
+        const desc = document.getElementById("demoDesc");
+        const badge = document.getElementById("demoBadge");
+        const bar = document.getElementById("demoBar");
+        const previewLabel = document.getElementById("demoPreviewLabel");
+        const previewCard = document.getElementById("demoPreviewCard");
+        const primary = document.getElementById("demoPrimary");
+        const secondary = document.getElementById("demoSecondary");
+        const routeMap = {
+          learn: "/guide#learn",
+          level: "/guide#games",
+          wrongbook: "/guide#wrongbook",
+          parent: "/guide#parents"
+        };
+
+        let current = "learn";
+
+        function render(panel) {
+          const data = panels[panel];
+          current = panel;
+          tabs.forEach((tab) => tab.classList.toggle("is-active", tab.dataset.panel === panel));
+          kicker.textContent = data.kicker;
+          title.textContent = data.title;
+          desc.textContent = data.desc;
+          badge.textContent = data.progress + "%";
+          bar.style.width = data.progress + "%";
+          previewLabel.textContent = data.previewLabel;
+          previewCard.innerHTML = data.preview.map((item) => '<div class="demo-item">' + item + '</div>').join("");
+          primary.textContent = data.primary;
+          secondary.textContent = data.secondary;
+          miniGrid.innerHTML = data.preview.map((item, index) => '<div class="mini-tile"><span>D' + (index + 1) + '</span><strong>' + item + '</strong></div>').join("");
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => render(tab.dataset.panel));
+        });
+
+        launches.forEach((launch) => {
+          launch.addEventListener("click", () => {
+            render(launch.dataset.panel);
+            document.getElementById("demo").scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
+
+        primary.addEventListener("click", () => {
+          window.location.href = routeMap[current];
+        });
+
+        secondary.addEventListener("click", () => {
+          const next = current === "learn" ? "level" : current === "level" ? "wrongbook" : current === "wrongbook" ? "parent" : "learn";
+          render(next);
+        });
+
+        render(current);
+      })();
+    `
   });
 }
 
