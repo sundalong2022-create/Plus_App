@@ -1,4 +1,5 @@
 import { handleRequest } from "./app.mjs";
+import { renderWebAppPage } from "./web-app.mjs";
 
 function sendHtml(res, statusCode, body) {
   res.statusCode = statusCode;
@@ -1314,6 +1315,11 @@ export async function handleSiteRequest(req, res) {
 
   if (pathname === "/docs") {
     sendHtml(res, 200, renderDocsPage());
+    return;
+  }
+
+  if (pathname === "/app") {
+    sendHtml(res, 200, renderWebAppPage());
     return;
   }
 
