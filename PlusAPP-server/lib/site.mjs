@@ -424,6 +424,55 @@ function renderLayout({ title, content, bodyClass = "", script = "" }) {
       padding: 18px;
       background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
     }
+    .demo-question {
+      padding: 16px;
+      border-radius: 16px;
+      background: #f7fbff;
+      border: 1px solid #dfe7f2;
+      margin-top: 14px;
+    }
+    .demo-question h4 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .option-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .option-btn:hover,
+    .option-btn:focus-visible {
+      background: #f3f7ff;
+    }
+    .option-btn.is-correct {
+      border-color: #3abf7a;
+      background: #e7fbf1;
+    }
+    .option-btn.is-wrong {
+      border-color: #f38b6a;
+      background: #fff3ef;
+    }
+    .demo-feedback {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fff7e8;
+      color: #8a5800;
+      border: 1px solid #ffd99f;
+      min-height: 48px;
+    }
     .demo-kicker {
       display: inline-flex;
       padding: 6px 10px;
@@ -495,6 +544,27 @@ function renderLayout({ title, content, bodyClass = "", script = "" }) {
       color: var(--text);
       font-size: 14px;
     }
+    .demo-status-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .status-chip {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .status-chip strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+    .status-chip span {
+      color: var(--muted);
+      font-size: 12px;
+    }
     .code-block {
       padding: 14px 16px;
       border-radius: 14px;
@@ -528,7 +598,8 @@ function renderLayout({ title, content, bodyClass = "", script = "" }) {
       }
       .hero-points,
       .demo-mini-grid,
-      .stats {
+      .stats,
+      .demo-status-row {
         grid-template-columns: 1fr 1fr;
       }
       h1 {
@@ -553,7 +624,9 @@ function renderLayout({ title, content, bodyClass = "", script = "" }) {
       }
       .hero-points,
       .demo-mini-grid,
-      .stats {
+      .stats,
+      .demo-status-row,
+      .option-grid {
         grid-template-columns: 1fr;
       }
       h1 {
@@ -835,7 +908,15 @@ function renderHomePage() {
               "慢速跟读",
               "翻卡记忆",
               "完成首轮热身"
-            ]
+            ],
+            question: {
+              title: "3 × 4 = ?",
+              prompt: "先想一想，再点一个答案。",
+              options: ["7", "10", "12", "14"],
+              correct: "12",
+              correctText: "答对了，3 × 4 就是 12。",
+              wrongText: "先别急，3 个 4 相加是 12。"
+            }
           },
           level: {
             kicker: "走格子闯关",
@@ -851,7 +932,15 @@ function renderHomePage() {
               "已答对 8 题",
               "奖励进度 70%",
               "离终点还有 3 步"
-            ]
+            ],
+            question: {
+              title: "4 × 6 = ?",
+              prompt: "走到下一格前，先选对这一题。",
+              options: ["20", "22", "24", "28"],
+              correct: "24",
+              correctText: "闯关成功，24 正好是 4 个 6。",
+              wrongText: "这一步先算慢一点，4 个 6 是 24。"
+            }
           },
           wrongbook: {
             kicker: "错题救援",
@@ -867,7 +956,15 @@ function renderHomePage() {
               "4 × 7 = ?",
               "今天先补这 2 题",
               "明天再复习一轮"
-            ]
+            ],
+            question: {
+              title: "4 × 7 = ?",
+              prompt: "这是今天要救援的高频错题。",
+              options: ["24", "26", "28", "30"],
+              correct: "28",
+              correctText: "救援成功，4 个 7 就是 28。",
+              wrongText: "再试一次，4 × 7 应该是 28。"
+            }
           },
           parent: {
             kicker: "家长看板",
@@ -883,22 +980,24 @@ function renderHomePage() {
               "已掌握 4 组",
               "学习中 2 组",
               "薄弱项 1 组"
-            ]
+            ],
+            question: {
+              title: "今日完成度如何？",
+              prompt: "家长只需要盯住一个方向：是否在稳定推进。",
+              options: ["需要重开", "正在推进", "已经停摆", "无从判断"],
+              correct: "正在推进",
+              correctText: "对，今天完成度不错，继续按节奏走。",
+              wrongText: "再看一眼，当前状态更像是正在推进。"
+            }
           }
         };
 
         const tabs = Array.from(document.querySelectorAll(".demo-tab"));
         const launches = Array.from(document.querySelectorAll(".demo-launch"));
-        const miniGrid = document.getElementById("demoMiniGrid");
-        const kicker = document.getElementById("demoKicker");
-        const title = document.getElementById("demoTitle");
-        const desc = document.getElementById("demoDesc");
         const badge = document.getElementById("demoBadge");
-        const bar = document.getElementById("demoBar");
         const previewLabel = document.getElementById("demoPreviewLabel");
         const previewCard = document.getElementById("demoPreviewCard");
-        const primary = document.getElementById("demoPrimary");
-        const secondary = document.getElementById("demoSecondary");
+        const demoMain = document.querySelector(".demo-main");
         const routeMap = {
           learn: "/guide#learn",
           level: "/guide#games",
@@ -907,21 +1006,90 @@ function renderHomePage() {
         };
 
         let current = "learn";
+        let answered = false;
+        let score = 0;
 
         function render(panel) {
           const data = panels[panel];
           current = panel;
+          answered = false;
           tabs.forEach((tab) => tab.classList.toggle("is-active", tab.dataset.panel === panel));
-          kicker.textContent = data.kicker;
-          title.textContent = data.title;
-          desc.textContent = data.desc;
           badge.textContent = data.progress + "%";
-          bar.style.width = data.progress + "%";
           previewLabel.textContent = data.previewLabel;
           previewCard.innerHTML = data.preview.map((item) => '<div class="demo-item">' + item + '</div>').join("");
-          primary.textContent = data.primary;
-          secondary.textContent = data.secondary;
-          miniGrid.innerHTML = data.preview.map((item, index) => '<div class="mini-tile"><span>D' + (index + 1) + '</span><strong>' + item + '</strong></div>').join("");
+          demoMain.innerHTML =
+            '<div class="demo-kicker" id="demoKicker">' + data.kicker + '</div>' +
+            '<h3 id="demoTitle">' + data.title + '</h3>' +
+            '<p id="demoDesc">' + data.desc + '</p>' +
+            '<div class="demo-actions">' +
+              '<button class="btn primary" type="button" id="demoPrimary">' + data.primary + '</button>' +
+              '<button class="btn" type="button" id="demoSecondary">' + data.secondary + '</button>' +
+            '</div>' +
+            '<div class="demo-progress">' +
+              '<div class="demo-progress-bar" id="demoBar" style="width: ' + data.progress + '%"></div>' +
+            '</div>' +
+            '<div class="demo-status-row">' +
+              '<div class="status-chip"><strong>' + data.badge + '</strong><span>当前演示状态</span></div>' +
+              '<div class="status-chip"><strong id="demoScore">' + score + ' 分</strong><span>演示得分</span></div>' +
+              '<div class="status-chip"><strong>' + (panel === "parent" ? "看板模式" : "练习模式") + '</strong><span>当前页面</span></div>' +
+            '</div>' +
+            '<div class="demo-mini-grid" id="demoMiniGrid">' +
+              data.preview.map((item, index) => '<div class="mini-tile"><span>D' + (index + 1) + '</span><strong>' + item + '</strong></div>').join("") +
+            '</div>' +
+            '<div class="demo-question">' +
+              '<h4>' + data.question.title + '</h4>' +
+              '<p>' + data.question.prompt + '</p>' +
+              '<div class="option-grid">' +
+                data.question.options.map((option) => '<button class="option-btn" type="button" data-option="' + option + '">' + option + '</button>').join("") +
+              '</div>' +
+              '<div class="demo-feedback" id="demoFeedback">请选择一个答案，看看会发生什么。</div>' +
+            '</div>';
+          bindDemoQuestion(data.question);
+          wireControls();
+        }
+
+        function bindDemoQuestion(question) {
+          const feedback = document.getElementById("demoFeedback");
+          const optionBtns = Array.from(document.querySelectorAll(".option-btn"));
+
+          optionBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              if (answered) return;
+              answered = true;
+              const picked = btn.dataset.option;
+              const isCorrect = picked === question.correct;
+              if (isCorrect) {
+                score += 10;
+                btn.classList.add("is-correct");
+                feedback.textContent = question.correctText + " 已获得 +10 分。";
+              } else {
+                btn.classList.add("is-wrong");
+                feedback.textContent = question.wrongText;
+                const correctBtn = optionBtns.find((item) => item.dataset.option === question.correct);
+                if (correctBtn) correctBtn.classList.add("is-correct");
+              }
+              const scoreEl = document.getElementById("demoScore");
+              const barEl = document.getElementById("demoBar");
+              if (scoreEl) scoreEl.textContent = score + " 分";
+              if (barEl) barEl.style.width = Math.min(100, panels[current].progress + (isCorrect ? 10 : 4)) + "%";
+            });
+          });
+        }
+
+        function wireControls() {
+          const newPrimary = document.getElementById("demoPrimary");
+          const newSecondary = document.getElementById("demoSecondary");
+          if (newPrimary) {
+            newPrimary.addEventListener("click", () => {
+              window.location.href = routeMap[current];
+            });
+          }
+          if (newSecondary) {
+            newSecondary.addEventListener("click", () => {
+              const next = current === "learn" ? "level" : current === "level" ? "wrongbook" : current === "wrongbook" ? "parent" : "learn";
+              render(next);
+            });
+          }
         }
 
         tabs.forEach((tab) => {
@@ -933,15 +1101,6 @@ function renderHomePage() {
             render(launch.dataset.panel);
             document.getElementById("demo").scrollIntoView({ behavior: "smooth", block: "start" });
           });
-        });
-
-        primary.addEventListener("click", () => {
-          window.location.href = routeMap[current];
-        });
-
-        secondary.addEventListener("click", () => {
-          const next = current === "learn" ? "level" : current === "level" ? "wrongbook" : current === "wrongbook" ? "parent" : "learn";
-          render(next);
         });
 
         render(current);
