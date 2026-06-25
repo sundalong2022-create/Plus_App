@@ -1,10 +1,10 @@
 import { createServer } from "node:http";
-import { handleRequest } from "../lib/app.mjs";
+import { handleSiteRequest } from "../lib/site.mjs";
 
 const PORT = Number(process.env.PORT || 8787);
 
 const server = createServer(async (req, res) => {
-  await handleRequest(req, res);
+  await handleSiteRequest(req, res);
 });
 
 server.listen(PORT, () => {
