@@ -276,6 +276,13 @@ export function renderWebAppPage() {
       font-weight: 850;
       color: var(--text);
       text-align: center;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .option-btn:hover,
+    .option-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: #bfd0eb;
+      box-shadow: 0 8px 18px rgba(18, 34, 56, 0.08);
     }
     .option-btn.is-correct {
       border-color: #3abf7a;
@@ -294,6 +301,236 @@ export function renderWebAppPage() {
       background: #fff7e8;
       color: #8a5800;
       line-height: 1.7;
+    }
+    .feedback.is-correct {
+      border-color: #bdebcf;
+      background: #eafbf2;
+      color: #157048;
+    }
+    .feedback.is-wrong {
+      border-color: #ffd1c4;
+      background: #fff2ed;
+      color: #ac4b2f;
+    }
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 850;
+      color: var(--text);
+    }
+    .hero-subtitle {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-progress-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .hero-progress-label,
+    .hero-note {
+      font-size: 14px;
+      color: #425975;
+      font-weight: 650;
+    }
+    .track-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .track-cell {
+      min-height: 64px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #62748f;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .track-cell.is-active {
+      background: var(--mint);
+      border-color: #bdebcf;
+      color: #157048;
+    }
+    .track-cell.is-current {
+      background: var(--sky);
+      border-color: #bfd4ff;
+      color: #215ac5;
+      box-shadow: 0 10px 20px rgba(34, 81, 204, 0.12);
+    }
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .answer-badge-row {
+      min-height: 36px;
+      margin-bottom: 6px;
+    }
+    .answer-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      animation: badge-pop .26s ease;
+    }
+    .answer-badge.is-correct {
+      background: #eafbf2;
+      color: #157048;
+      border: 1px solid #bdebcf;
+    }
+    .answer-badge.is-wrong {
+      background: #fff2ed;
+      color: #ac4b2f;
+      border: 1px solid #ffd1c4;
+    }
+    .meta-actions {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn.ghost {
+      background: #fff;
+      color: #3f5678;
+    }
+    .result-burst {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      background: rgba(19, 34, 56, 0.12);
+    }
+    .result-burst-shell {
+      position: relative;
+      width: min(360px, calc(100vw - 36px));
+      aspect-ratio: 1 / 1;
+    }
+    .result-burst-orbit {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      opacity: 0;
+      animation: reward-orbit 1.15s ease-out infinite;
+    }
+    .result-burst-orbit.tone-warm {
+      background: linear-gradient(180deg, #ffc669 0%, #ff8a00 100%);
+    }
+    .result-burst-orbit.tone-mint {
+      background: linear-gradient(180deg, #72e3bf 0%, #0d8e69 100%);
+    }
+    .result-burst-orbit.tone-coral {
+      background: linear-gradient(180deg, #ffb29c 0%, #df6b4f 100%);
+    }
+    .result-burst-orbit.tone-sky {
+      background: linear-gradient(180deg, #9fd0ff 0%, #3977d6 100%);
+    }
+    .result-burst-orbit.o1 { top: 18px; left: calc(50% - 9px); animation-delay: 0ms; }
+    .result-burst-orbit.o2 { top: 72px; right: 18px; animation-delay: 120ms; }
+    .result-burst-orbit.o3 { right: 34px; bottom: 84px; animation-delay: 240ms; }
+    .result-burst-orbit.o4 { bottom: 18px; left: calc(50% - 9px); animation-delay: 360ms; }
+    .result-burst-orbit.o5 { bottom: 92px; left: 26px; animation-delay: 480ms; }
+    .result-burst-orbit.o6 { top: 80px; left: 20px; animation-delay: 600ms; }
+    .result-burst-card {
+      position: absolute;
+      inset: 66px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 24px 52px rgba(18, 34, 56, 0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 22px 18px;
+      animation: reward-card-pop .52s cubic-bezier(.2,.8,.2,1);
+    }
+    .result-burst-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: #ffeed3;
+      color: #9c5a00;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .result-burst-title {
+      font-size: 28px;
+      line-height: 1.15;
+      font-weight: 850;
+      color: var(--text);
+    }
+    .result-burst-subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .sr-only-audio {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    @keyframes badge-pop {
+      0% {
+        opacity: 0;
+        transform: scale(.82) translateY(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    @keyframes reward-card-pop {
+      0% {
+        opacity: 0;
+        transform: scale(.76) translateY(16px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    @keyframes reward-orbit {
+      0% {
+        opacity: 0;
+        transform: scale(.65) translateY(14px);
+      }
+      30% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.18) translateY(-22px);
+      }
     }
     .calendar-row {
       display: grid;
@@ -431,12 +668,18 @@ export function renderWebAppPage() {
       .view-head h1 {
         font-size: 26px;
       }
+      .hero-title {
+        font-size: 24px;
+      }
       .option-grid,
       .calendar-row {
         grid-template-columns: 1fr;
       }
       .match-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .result-burst-card {
+        inset: 58px 42px;
       }
     }
   </style>
@@ -509,11 +752,20 @@ export function renderWebAppPage() {
         lastFeedback: runtime?.lastFeedback || null,
         lastAnswerMeta: runtime?.lastAnswerMeta || null,
         result: runtime?.result || null,
-        matchState: runtime?.matchState || defaultMatchState()
+        matchState: runtime?.matchState || defaultMatchState(),
+        scoreState: runtime?.scoreState || {
+          correctCount: 0,
+          comboCount: 0,
+          rescuedCount: 0,
+          levelStep: 0
+        },
+        rewardBurst: runtime?.rewardBurst || null,
+        resultCelebrated: runtime?.resultCelebrated || false
       };
 
       let matchResolveTimer = 0;
-      let matchRewardTimer = 0;
+      let rewardBurstTimer = 0;
+      let sessionFinishTimer = 0;
 
       const root = document.getElementById("appRoot");
       const authStatus = document.getElementById("authStatus");
@@ -531,9 +783,19 @@ export function renderWebAppPage() {
             lastFeedback: state.lastFeedback,
             lastAnswerMeta: state.lastAnswerMeta,
             result: state.result,
-            matchState: state.matchState
+            matchState: state.matchState,
+            scoreState: state.scoreState,
+            rewardBurst: state.rewardBurst,
+            resultCelebrated: state.resultCelebrated
           })
         );
+      }
+
+      function clearRewardBurstTimer() {
+        if (rewardBurstTimer) {
+          clearTimeout(rewardBurstTimer);
+          rewardBurstTimer = 0;
+        }
       }
 
       function clearTimers() {
@@ -541,10 +803,18 @@ export function renderWebAppPage() {
           clearTimeout(matchResolveTimer);
           matchResolveTimer = 0;
         }
-        if (matchRewardTimer) {
-          clearTimeout(matchRewardTimer);
-          matchRewardTimer = 0;
+        clearRewardBurstTimer();
+        if (sessionFinishTimer) {
+          clearTimeout(sessionFinishTimer);
+          sessionFinishTimer = 0;
         }
+      }
+
+      function dismissRewardBurst() {
+        clearRewardBurstTimer();
+        if (!state.rewardBurst) return;
+        state.rewardBurst = null;
+        persistRuntime();
       }
 
       function clearActiveSession() {
@@ -556,6 +826,14 @@ export function renderWebAppPage() {
         state.lastFeedback = null;
         state.lastAnswerMeta = null;
         state.matchState = defaultMatchState();
+        state.scoreState = {
+          correctCount: 0,
+          comboCount: 0,
+          rescuedCount: 0,
+          levelStep: 0
+        };
+        state.rewardBurst = null;
+        state.resultCelebrated = false;
         persistRuntime();
       }
 
@@ -620,17 +898,205 @@ export function renderWebAppPage() {
           rescue: "错题救援"
         };
         const label = labels[state.gameType] || "训练";
+        const total = state.session.questions?.length || 0;
+        const currentQuestion = state.session.questions?.[Math.min(state.questionIndex, Math.max(total - 1, 0))];
+        const progressHint = state.answered ? "本题已作答，返回后会停在这一题" : "当前题会原样保留";
         if (state.gameType === "match") {
           return {
             label,
-            detail: "已配对 " + state.matchState.matchedCount + " / " + state.matchState.totalPairs + " 组"
+            detail: "已配对 " + state.matchState.matchedCount + " / " + state.matchState.totalPairs + " 组",
+            hint: progressHint,
+            ctaText: "继续配对"
           };
         }
-        const total = state.session.questions?.length || 0;
+        if (state.gameType === "rescue") {
+          return {
+            label,
+            detail: "已救回 " + state.scoreState.rescuedCount + " / " + total + " 题",
+            hint: (currentQuestion?.formula ? "当前题：" + currentQuestion.formula + " · " : "") + progressHint,
+            ctaText: state.answered ? "回到当前题" : "继续救援"
+          };
+        }
+        if (state.gameType === "level") {
+          return {
+            label,
+            detail: "进行到第 " + Math.min(state.questionIndex + 1, total || 1) + " 题 · 已前进 " + state.scoreState.levelStep + " 格",
+            hint: (currentQuestion?.formula ? "当前题：" + currentQuestion.formula + " · " : "") + progressHint,
+            ctaText: state.answered ? "回到当前题" : "继续闯关"
+          };
+        }
         return {
           label,
-          detail: "进行到第 " + Math.min(state.questionIndex + 1, total || 1) + " / " + total + " 题"
+          detail: "进行到第 " + Math.min(state.questionIndex + 1, total || 1) + " / " + total + " 题 · 连对 " + state.scoreState.comboCount + " 题",
+          hint: (currentQuestion?.formula ? "当前题：" + currentQuestion.formula + " · " : "") + progressHint,
+          ctaText: state.answered ? "回到当前题" : "继续答题"
         };
+      }
+
+      function getQuestionCount() {
+        return state.session?.questions?.length || 0;
+      }
+
+      function getQuestionProgressPercent() {
+        const total = getQuestionCount() || 1;
+        return Math.round(((state.questionIndex + 1) / total) * 100);
+      }
+
+      function ensureAudioElement() {
+        let audio = document.getElementById("ttsPlayer");
+        if (audio) return audio;
+        audio = document.createElement("audio");
+        audio.id = "ttsPlayer";
+        audio.className = "sr-only-audio";
+        audio.preload = "auto";
+        document.body.appendChild(audio);
+        return audio;
+      }
+
+      function stopAudio() {
+        const audio = document.getElementById("ttsPlayer");
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+      }
+
+      function getSpeechRate(kind) {
+        if (kind === "question") return 0.86;
+        if (kind === "reward") return 0.94;
+        return 0.92;
+      }
+
+      function getSpeechVoice() {
+        if (!("speechSynthesis" in window)) return null;
+        const voices = window.speechSynthesis.getVoices();
+        return (
+          voices.find((voice) => voice.lang === "zh-CN") ||
+          voices.find((voice) => voice.lang && voice.lang.startsWith("zh")) ||
+          null
+        );
+      }
+
+      function speakText(text, kind) {
+        const message = String(text || "").trim();
+        if (!message) return;
+        if (!("speechSynthesis" in window) || typeof window.SpeechSynthesisUtterance !== "function") {
+          return;
+        }
+        try {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(message);
+          const voice = getSpeechVoice();
+          utterance.lang = voice?.lang || "zh-CN";
+          if (voice) utterance.voice = voice;
+          utterance.rate = getSpeechRate(kind);
+          utterance.pitch = kind === "reward" ? 1.04 : 1;
+          utterance.volume = 1;
+          window.speechSynthesis.speak(utterance);
+        } catch {
+          // Ignore browser speech failures.
+        }
+      }
+
+      function buildQuestionPromptText(question) {
+        if (!question?.formula) return "";
+        return question.formula.replaceAll("×", "乘") + "，等于几？";
+      }
+
+      function getRewardSpeechText(kind) {
+        return kind === "match"
+          ? "配对完成，做得真棒。"
+          : "太棒了，完成啦。今天又进步了一点。";
+      }
+
+      async function playAudio(path, fallbackText, kind) {
+        try {
+          const audio = ensureAudioElement();
+          let fallbackPlayed = false;
+          const playFallback = () => {
+            if (fallbackPlayed) return;
+            fallbackPlayed = true;
+            if (fallbackText) {
+              speakText(fallbackText, kind);
+            }
+          };
+          audio.onerror = playFallback;
+          if (audio.getAttribute("src") !== path) {
+            audio.setAttribute("src", path);
+          }
+          audio.currentTime = 0;
+          await audio.play().catch(playFallback);
+        } catch {
+          if (fallbackText) {
+            speakText(fallbackText, kind);
+          }
+        }
+      }
+
+      async function playQuestionAudio() {
+        const question = state.session?.questions?.[state.questionIndex];
+        const questionId = question?.id;
+        if (!questionId) return;
+        await playAudio(
+          "/api/tts/question?questionId=" + encodeURIComponent(questionId),
+          buildQuestionPromptText(question),
+          "question"
+        );
+      }
+
+      async function playFeedbackAudio() {
+        if (!state.lastFeedback) return;
+        speakText(state.lastFeedback, "feedback");
+      }
+
+      async function playRewardAudio(kind) {
+        const key = kind === "match" ? "rewardMatch" : "rewardComplete";
+        await playAudio(
+          "/api/tts/system?key=" + encodeURIComponent(key),
+          getRewardSpeechText(kind),
+          "reward"
+        );
+      }
+
+      function buildRewardBurstHtml() {
+        if (!state.rewardBurst) return "";
+        const tone = state.rewardBurst.tone || "warm";
+        return (
+          '<div class="result-burst">' +
+            '<div class="result-burst-shell">' +
+              '<div class="result-burst-orbit o1 tone-' + tone + '"></div>' +
+              '<div class="result-burst-orbit o2 tone-' + tone + '"></div>' +
+              '<div class="result-burst-orbit o3 tone-' + tone + '"></div>' +
+              '<div class="result-burst-orbit o4 tone-' + tone + '"></div>' +
+              '<div class="result-burst-orbit o5 tone-' + tone + '"></div>' +
+              '<div class="result-burst-orbit o6 tone-' + tone + '"></div>' +
+              '<div class="result-burst-card">' +
+                '<div class="result-burst-badge">' + escapeHtml(state.rewardBurst.badge) + '</div>' +
+                '<div class="result-burst-title">' + escapeHtml(state.rewardBurst.title) + '</div>' +
+                (state.rewardBurst.subtitle ? '<div class="result-burst-subtitle">' + escapeHtml(state.rewardBurst.subtitle) + '</div>' : "") +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }
+
+      function showRewardBurst(payload, options) {
+        clearRewardBurstTimer();
+        state.rewardBurst = payload;
+        persistRuntime();
+        if (options?.rerender !== false) {
+          options?.render?.();
+        }
+        rewardBurstTimer = setTimeout(() => {
+          state.rewardBurst = null;
+          persistRuntime();
+          if (options?.render) {
+            options.render();
+          }
+        }, options?.durationMs || 1800);
       }
 
       async function api(path, options) {
@@ -697,7 +1163,11 @@ export function renderWebAppPage() {
         const resumeHtml = resumeMeta
           ? '<div class="resume-card"><div class="row-title">继续上次训练</div><p>' +
             escapeHtml(resumeMeta.label + " · " + resumeMeta.detail) +
-            '</p><div style="margin-top:14px"><button class="btn primary" type="button" data-resume-session>继续训练</button></div></div>'
+            '</p>' +
+            (resumeMeta.hint ? '<p style="margin-top:6px">' + escapeHtml(resumeMeta.hint) + '</p>' : "") +
+            '<div style="margin-top:14px"><button class="btn primary" type="button" data-resume-session>' +
+            escapeHtml(resumeMeta.ctaText || "继续训练") +
+            "</button></div></div>"
           : "";
         const taskHtml = tasks.map((task) =>
           '<div class="task-row">' +
@@ -754,6 +1224,14 @@ export function renderWebAppPage() {
         state.lastAnswerMeta = null;
         state.result = null;
         state.matchState = defaultMatchState();
+        state.scoreState = {
+          correctCount: 0,
+          comboCount: 0,
+          rescuedCount: 0,
+          levelStep: 0
+        };
+        state.rewardBurst = null;
+        state.resultCelebrated = false;
         syncViewFromGame();
         setActive(gameType === "match" ? "match" : state.view);
         persistRuntime();
@@ -792,20 +1270,71 @@ export function renderWebAppPage() {
         syncViewFromGame();
         setActive(meta.view);
         persistRuntime();
+        const progressPercent = getQuestionProgressPercent();
+        const heroBadge = state.gameType === "rescue"
+          ? '<div class="pill">已救回 ' + state.scoreState.rescuedCount + " / " + questions.length + " 题</div>"
+          : state.gameType === "level"
+            ? '<div class="pill">已前进 ' + state.scoreState.levelStep + " 格</div>"
+            : '<div class="pill">连对 ' + state.scoreState.comboCount + " 题</div>";
+        const sourceText = state.gameType === "rescue"
+          ? "优先错题"
+          : state.gameType === "level"
+            ? "当前关卡"
+            : escapeHtml(question.sourceTag);
         const options = question.options.map((option) =>
           '<button class="option-btn" type="button" data-answer="' + option + '">' + option + "</button>"
         ).join("");
         const feedback = state.lastFeedback
-          ? '<div class="feedback">' + escapeHtml(state.lastFeedback) + "</div>"
+          ? '<div class="feedback ' + (state.lastAnswerMeta?.correct ? "is-correct" : "is-wrong") + '">' + escapeHtml(state.lastFeedback) + "</div>"
           : '<div class="feedback">选一个答案，答完会看到口诀提示。</div>';
+        const answerBadge = state.lastAnswerMeta
+          ? '<div class="answer-badge-row"><div class="answer-badge ' + (state.lastAnswerMeta.correct ? "is-correct" : "is-wrong") + '">' +
+            (state.gameType === "level"
+              ? (state.lastAnswerMeta.correct ? "前进一步" : "先停一下")
+              : state.gameType === "rescue"
+                ? (state.lastAnswerMeta.correct ? "救回一题" : "再看一眼")
+                : (state.lastAnswerMeta.correct ? "答对啦" : "再想想")) +
+            "</div></div>"
+          : '<div class="answer-badge-row"></div>';
+        const trackHtml = state.gameType === "level"
+          ? '<div class="card"><h2>关卡路线</h2><p>答对一题就向前走一步。</p><div class="track-grid" style="grid-template-columns: repeat(' + Math.max(questions.length, 1) + ', minmax(0, 1fr));">' +
+            questions.map((item, index) => {
+              const classes = [
+                "track-cell",
+                index < state.scoreState.levelStep ? "is-active" : "",
+                index === state.scoreState.levelStep && state.scoreState.levelStep < questions.length ? "is-current" : ""
+              ].filter(Boolean).join(" ");
+              return '<div class="' + classes + '">' + (index === questions.length - 1 ? "终点" : String(index + 1)) + "</div>";
+            }).join("") +
+            "</div></div>"
+          : "";
+        const replayFeedbackButton = state.lastAnswerMeta
+          ? '<button class="btn small ghost" type="button" data-listen-feedback>听反馈</button>'
+          : "";
         const actionHtml = state.answered
-          ? '<button class="btn" type="button" data-next-question>下一题</button>'
+          ? '<button class="btn primary" type="button" data-next-question>下一题</button><button class="btn" type="button" data-view-target="home">回首页保存进度</button>'
           : '<button class="btn" type="button" data-view-target="home">稍后继续</button>';
         renderShell(
           meta.title,
           "第 " + (state.questionIndex + 1) + " / " + questions.length + " 题",
+          buildRewardBurstHtml() +
+          '<div class="hero-card">' +
+            '<div class="hero-top"><div class="pill">' + meta.title + "</div>" + heroBadge + "</div>" +
+            '<span class="hero-title">' + (state.gameType === "rescue" ? "把最近没记牢的题补回来" : state.gameType === "level" ? "答对前进，到终点就过关" : "每次只做一小题，越往后越顺手") + "</span>" +
+            '<span class="hero-subtitle">' + (state.gameType === "rescue" ? "错题不用一次全做完，优先救回最近几题就够了。" : state.gameType === "level" ? "走到最后一格，就表示今天这轮主练习完成了。" : "不会也没关系，先猜一猜，再记口诀。") + "</span>" +
+            '<div class="hero-progress-row"><span class="hero-progress-label">本轮进度 ' + progressPercent + '%</span><span class="hero-note">' +
+              (state.gameType === "rescue"
+                ? "已救回 " + state.scoreState.rescuedCount + " / " + questions.length + " 题"
+                : state.gameType === "level"
+                  ? "已前进 " + state.scoreState.levelStep + " 步"
+                  : "答对 " + state.scoreState.correctCount + " / " + questions.length + " 题") +
+              "</span></div>" +
+            '<div class="progress"><div class="progress-bar" style="width:' + progressPercent + '%"></div></div>' +
+          "</div>" +
+          trackHtml +
           '<div class="question-card">' +
-            '<div class="pill">' + escapeHtml(question.sourceTag) + "</div>" +
+            '<div class="question-meta"><div class="pill">' + sourceText + '</div><div class="meta-actions"><button class="btn small ghost" type="button" data-listen-question>听题</button>' + replayFeedbackButton + '</div></div>' +
+            answerBadge +
             '<div class="question-formula">' + escapeHtml(question.formula) + " = ?</div>" +
             '<div class="option-grid">' + options + "</div>" +
             feedback +
@@ -840,16 +1369,31 @@ export function renderWebAppPage() {
           correctAnswer: feedback.correctAnswer,
           correct: feedback.correct
         };
+        if (state.gameType === "rescue") {
+          state.scoreState.rescuedCount += feedback.correct ? 1 : 0;
+          state.scoreState.comboCount = feedback.comboCount;
+        } else if (state.gameType === "level") {
+          state.scoreState.levelStep = Math.min(getQuestionCount(), state.scoreState.levelStep + (feedback.correct ? 1 : 0));
+          state.scoreState.correctCount += feedback.correct ? 1 : 0;
+          state.scoreState.comboCount = feedback.comboCount;
+        } else {
+          state.scoreState.correctCount += feedback.correct ? 1 : 0;
+          state.scoreState.comboCount = feedback.comboCount;
+        }
         state.lastFeedback = feedback.correct
           ? "答对了！" + feedback.rhymeText + "。连对 " + feedback.comboCount + " 题。"
           : "再记一遍：" + feedback.rhymeText + "。正确答案是 " + feedback.correctAnswer + "。";
         persistRuntime();
         renderQuestion();
+        void playFeedbackAudio();
       }
 
       async function finishSession() {
         if (!state.session) return;
         clearTimers();
+        stopAudio();
+        state.rewardBurst = null;
+        state.resultCelebrated = false;
         state.result = await api("/api/session/finish", {
           method: "POST",
           body: { sessionId: state.session.sessionId }
@@ -862,6 +1406,7 @@ export function renderWebAppPage() {
 
       function nextQuestion() {
         if (!state.session) return;
+        stopAudio();
         state.questionIndex += 1;
         state.answered = false;
         state.lastFeedback = null;
@@ -880,9 +1425,24 @@ export function renderWebAppPage() {
         }
         const weak = result.weakItems.length ? result.weakItems.join("、") : "没有新增薄弱项";
         const mastered = result.newMasteredItems?.length ? result.newMasteredItems.join("、") : "这轮先把节奏稳住了";
+        if (!state.resultCelebrated) {
+          state.resultCelebrated = true;
+          persistRuntime();
+          showRewardBurst(
+            {
+              badge: result.reward.title,
+              title: result.reward.type === "star" ? "这一轮很稳" : "又完成一轮训练",
+              subtitle: result.nextAction === "wrongReview" ? "等会儿去把错题也补一下" : "今天又进步了一点",
+              tone: result.reward.type === "star" ? "warm" : "mint"
+            },
+            { durationMs: 1800, render: renderResult, rerender: false }
+          );
+          void playRewardAudio("complete");
+        }
         renderShell(
           "训练完成",
           "正确 " + result.correctCount + " / " + result.totalQuestions + "，正确率 " + Math.round(result.accuracy * 100) + "%",
+          buildRewardBurstHtml() +
           '<div class="grid two">' +
             '<div class="reward"><h2>' + escapeHtml(result.reward.title) + '</h2><p>奖励数量：' + result.reward.count + "</p><p>本轮掌握：" + escapeHtml(mastered) + "</p></div>" +
             '<div class="card"><h2>需要关注</h2><p>' + escapeHtml(weak) + "</p></div>" +
@@ -920,10 +1480,11 @@ export function renderWebAppPage() {
         renderShell(
           "翻卡片配对",
           "已配对 " + state.matchState.matchedCount + " / " + state.matchState.totalPairs + " 组",
-          '<div class="hero-card"><div class="pill">配对进度 ' + progress + '%</div><div class="progress"><div class="progress-bar" style="width:' + progress + '%"></div></div></div>' +
+          buildRewardBurstHtml() +
+          '<div class="hero-card"><div class="hero-top"><div class="pill">翻卡片配对</div><div class="pill">已配对 ' + state.matchState.matchedCount + " / " + state.matchState.totalPairs + ' 组</div></div><span class="hero-title">把算式和答案找到同一对</span><span class="hero-subtitle">先翻两张，配对成功就能留下来。</span><div class="hero-progress-row"><span class="hero-progress-label">配对进度 ' + progress + '%</span><span class="hero-note">还差 ' + Math.max(state.matchState.totalPairs - state.matchState.matchedCount, 0) + ' 组</span></div><div class="progress"><div class="progress-bar" style="width:' + progress + '%"></div></div></div>' +
           '<div class="match-grid">' + cardsHtml + "</div>" +
           reward,
-          '<button class="btn" type="button" data-view-target="home">稍后继续</button>'
+          '<button class="btn" type="button" data-view-target="home">稍后继续</button><button class="btn ghost" type="button" data-play-match-audio>播放奖励音</button>'
         );
       }
 
@@ -949,9 +1510,17 @@ export function renderWebAppPage() {
           return;
         }
         state.matchState.showReward = true;
-        persistRuntime();
-        renderMatch();
-        matchRewardTimer = setTimeout(() => {
+        showRewardBurst(
+          {
+            badge: "配对完成",
+            title: "这一轮全都找到了",
+            subtitle: "奖励马上到账",
+            tone: "sky"
+          },
+          { durationMs: 1500, render: renderMatch }
+        );
+        await playRewardAudio("match");
+        sessionFinishTimer = setTimeout(() => {
           finishSession();
         }, 900);
       }
@@ -1042,6 +1611,14 @@ export function renderWebAppPage() {
         state.answered = false;
         state.lastFeedback = null;
         state.lastAnswerMeta = null;
+        state.scoreState = {
+          correctCount: 0,
+          comboCount: 0,
+          rescuedCount: 0,
+          levelStep: 0
+        };
+        state.rewardBurst = null;
+        state.resultCelebrated = false;
         syncViewFromGame();
         persistRuntime();
         renderQuestion();
@@ -1073,6 +1650,10 @@ export function renderWebAppPage() {
 
       async function restoreRuntimeView() {
         if (state.view === "result" && state.result) {
+          if (state.rewardBurst) {
+            state.resultCelebrated = true;
+            showRewardBurst(state.rewardBurst, { render: renderResult, rerender: false });
+          }
           renderResult();
           return;
         }
@@ -1096,6 +1677,9 @@ export function renderWebAppPage() {
           if (state.session && state.gameType === "match") {
             state.matchState = normalizeMatchState(state.matchState.cards?.length ? state.matchState.cards : state.session.cards || []);
             persistRuntime();
+            if (state.rewardBurst) {
+              showRewardBurst(state.rewardBurst, { render: renderMatch });
+            }
             renderMatch();
             return;
           }
@@ -1104,6 +1688,9 @@ export function renderWebAppPage() {
         }
         if (state.view === "quiz" || state.view === "level") {
           if (state.session) {
+            if (state.rewardBurst) {
+              showRewardBurst(state.rewardBurst, { render: renderQuestion });
+            }
             renderQuestion();
             return;
           }
@@ -1119,6 +1706,10 @@ export function renderWebAppPage() {
 
       async function route(view) {
         try {
+          stopAudio();
+          if (view !== "result" && state.rewardBurst) {
+            dismissRewardBurst();
+          }
           if (view === "home") {
             await loadBase();
             renderHome();
@@ -1175,7 +1766,8 @@ export function renderWebAppPage() {
       }
 
       document.addEventListener("click", (event) => {
-        const target = event.target.closest("button");
+        const clickTarget = event.target instanceof Element ? event.target : event.target?.parentElement || null;
+        const target = clickTarget ? clickTarget.closest("button") : null;
         if (!target) return;
         if (target.dataset.view) route(target.dataset.view);
         if (target.dataset.viewTarget) route(target.dataset.viewTarget);
@@ -1192,6 +1784,9 @@ export function renderWebAppPage() {
         if (target.hasAttribute("data-next-question")) nextQuestion();
         if (target.hasAttribute("data-start-rescue")) startRescue();
         if (target.hasAttribute("data-resume-session")) resumeSession();
+        if (target.hasAttribute("data-listen-question")) playQuestionAudio();
+        if (target.hasAttribute("data-listen-feedback")) playFeedbackAudio();
+        if (target.hasAttribute("data-play-match-audio")) playRewardAudio("match");
       });
 
       async function boot() {
