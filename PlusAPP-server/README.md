@@ -1,6 +1,6 @@
 # PlusAPP Server
 
-PlusAPP 的最小后端示例，负责演示微信小程序登录链路，并承接当前训练原型所需的接口。
+PlusAPP 的官网首页、Web 应用和 API 服务，负责承接微信小程序登录链路，并提供浏览器训练版页面。
 
 ## 这个示例解决什么
 
@@ -14,10 +14,17 @@ PlusAPP 的最小后端示例，负责演示微信小程序登录链路，并承
 
 ```text
 PlusAPP-server
+├── api
+├── lib
+├── mock-api.mjs
+├── scripts
 ├── .env.example
 ├── .gitignore
+├── Dockerfile
+├── vercel.json
+├── index.js
 ├── package.json
-└── server.mjs
+└── README.md
 ```
 
 ## 本地启动
@@ -32,15 +39,17 @@ cd /Users/sdragon/PlusAPP-server
 cp .env.example .env
 ```
 
-2. 先用 mock 模式启动
+2. 启动本地服务
 
 ```bash
 npm run dev
 ```
 
-3. 打开健康检查
+3. 打开本地入口
 
 ```bash
+curl http://127.0.0.1:8787/
+curl http://127.0.0.1:8787/app
 curl http://127.0.0.1:8787/health
 ```
 
@@ -49,6 +58,12 @@ curl http://127.0.0.1:8787/health
 - 当前后端已经内置一份可独立运行的 mock 训练数据
 - 所以无论本地开发还是微信云托管部署，都不再依赖 `PlusAPP` 目录里的编译产物
 - 如果要启用更自然的云端语音，再补 `OPENAI_API_KEY` 即可；不配时，小程序会继续回退到本地音频资源
+
+本地默认入口：
+
+- 官网首页：`http://127.0.0.1:8787/`
+- Web 应用：`http://127.0.0.1:8787/app`
+- 健康检查：`http://127.0.0.1:8787/health`
 
 ## 两种模式
 
@@ -157,6 +172,7 @@ Authorization: Bearer <token>
 - `GET /api/home/today`
 - `GET /api/learn/content`
 - `POST /api/progress/mark-task`
+- `POST /api/progress/reset-all`
 - `POST /api/session/start`
 - `POST /api/session/answer`
 - `POST /api/session/finish`
@@ -225,3 +241,33 @@ WECHAT_APP_SECRET=你的新AppSecret
 ```bash
 npm run dev
 ```
+
+生产部署命令：
+
+```bash
+vercel build --prod --yes
+vercel deploy --prebuilt --prod --yes
+```
+
+当前线上入口：
+
+- 官网首页：`https://plusapp-server.vercel.app/`
+- Web 应用：`https://plusapp-server.vercel.app/app`
+
+## Web 应用入口说明
+
+浏览器端当前使用同一域名承接两类页面：
+
+- `/`：官网首页
+- `/app`：可交互 Web 训练版
+
+`/app` 目前包含：
+
+- 首页训练总览
+- 学习页
+- 快问快答
+- 翻卡片配对
+- 走格子闯关
+- 错题本 / 错题救援
+- 家长看板
+- 从头开始学习重置入口
