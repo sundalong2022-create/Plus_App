@@ -551,6 +551,14 @@ export async function handleRequest(req, res) {
       return;
     }
 
+    if (req.method === "POST" && pathname === "/api/progress/reset-all") {
+      sendJson(res, 200, {
+        ok: true,
+        data: await mockApi.progress.resetAll()
+      });
+      return;
+    }
+
     if (req.method === "POST" && pathname === "/api/session/start") {
       const body = await readJsonBody(req);
       sendJson(res, 200, {

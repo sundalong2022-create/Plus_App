@@ -574,6 +574,290 @@ export function renderWebAppPage() {
       padding: 18px;
       margin-bottom: 14px;
     }
+    .stack-gap {
+      display: grid;
+      gap: 14px;
+    }
+    .summary-card {
+      border: 1px solid #d9e4f3;
+      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
+      border-radius: 22px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .summary-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .summary-head h2,
+    .summary-section-title,
+    .trend-card h2 {
+      margin: 10px 0 6px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+    .summary-score {
+      min-width: 108px;
+      border: 1px solid #dbe7fb;
+      border-radius: 18px;
+      background: #fff;
+      padding: 14px 12px;
+      text-align: center;
+      box-shadow: 0 12px 24px rgba(34, 81, 204, 0.08);
+    }
+    .summary-score strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 850;
+      color: #215ac5;
+    }
+    .summary-score span {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .summary-meta-grid,
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .summary-meta-item,
+    .metric-item {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 14px;
+    }
+    .summary-meta-item strong,
+    .metric-item strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.2;
+      margin-top: 4px;
+      font-weight: 850;
+      color: var(--text);
+    }
+    .summary-meta-item span,
+    .metric-item span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .summary-insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .insight-box {
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .insight-box.tone-mint {
+      background: linear-gradient(180deg, #f2fff8 0%, #ffffff 100%);
+      border-color: #cdeedc;
+    }
+    .insight-box.tone-coral {
+      background: linear-gradient(180deg, #fff7f3 0%, #ffffff 100%);
+      border-color: #ffdacc;
+    }
+    .insight-box h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+    .summary-actions,
+    .split-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .session-mini-list {
+      display: grid;
+      gap: 10px;
+    }
+    .session-mini-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 13px 14px;
+    }
+    .session-mini-row strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .session-mini-row span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .session-mini-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 62px;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: #215ac5;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .support-note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #516684;
+    }
+    .trend-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+      padding: 18px;
+    }
+    .trend-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .trend-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .tiny-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #f4f7fb;
+      color: #4a607f;
+      border: 1px solid #deebfb;
+    }
+    .trend-chart {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      align-items: end;
+      min-height: 174px;
+    }
+    .trend-col {
+      display: grid;
+      gap: 8px;
+      align-items: end;
+      justify-items: center;
+    }
+    .trend-bar-shell {
+      width: 100%;
+      height: 120px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #f7faff 0%, #edf3fb 100%);
+      border: 1px solid #e2ebf7;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 8px;
+    }
+    .trend-bar {
+      width: 100%;
+      border-radius: 12px;
+      min-height: 8px;
+      transition: height .24s ease;
+    }
+    .trend-bar.practice {
+      background: linear-gradient(180deg, #90c8ff 0%, #3977d6 100%);
+    }
+    .trend-bar.practice.is-empty {
+      background: linear-gradient(180deg, #d9e6f7 0%, #c9d6ea 100%);
+    }
+    .trend-col-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      text-align: center;
+    }
+    .trend-col-value {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 800;
+      text-align: center;
+    }
+    .trend-rows {
+      display: grid;
+      gap: 10px;
+    }
+    .trend-row {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 12px 14px;
+    }
+    .trend-row-head,
+    .trend-row-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .trend-row-head strong {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    .trend-row-meta {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .trend-inline-track {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .trend-inline-bars {
+      height: 10px;
+      border-radius: 999px;
+      background: #edf3fb;
+      overflow: hidden;
+      display: flex;
+    }
+    .trend-inline-bar.added {
+      background: linear-gradient(90deg, #ffcfb2 0%, #f38b6a 100%);
+    }
+    .trend-inline-bar.resolved {
+      background: linear-gradient(90deg, #9ae3c4 0%, #23a16d 100%);
+    }
+    .trend-inline-track .pill {
+      background: #fff;
+    }
     .match-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -644,6 +928,14 @@ export function renderWebAppPage() {
       .grid.four {
         grid-template-columns: 1fr;
       }
+      .summary-meta-grid,
+      .metric-grid,
+      .summary-insight-grid {
+        grid-template-columns: 1fr;
+      }
+      .trend-chart {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+      }
       .match-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
@@ -671,9 +963,24 @@ export function renderWebAppPage() {
       .hero-title {
         font-size: 24px;
       }
+      .summary-head,
+      .trend-head,
+      .summary-actions,
+      .split-actions,
+      .trend-inline-track {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .summary-score {
+        min-width: 0;
+        width: 100%;
+      }
       .option-grid,
       .calendar-row {
         grid-template-columns: 1fr;
+      }
+      .trend-chart {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
       .match-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -696,6 +1003,7 @@ export function renderWebAppPage() {
       </a>
       <div class="top-actions">
         <span class="status-pill" id="authStatus">连接中</span>
+        <button class="btn small" type="button" data-reset-learning>从头开始学习</button>
         <a class="btn small" href="/">官网首页</a>
       </div>
     </header>
@@ -835,6 +1143,40 @@ export function renderWebAppPage() {
         state.rewardBurst = null;
         state.resultCelebrated = false;
         persistRuntime();
+      }
+
+      async function resetLearning() {
+        clearTimers();
+        stopAudio();
+        await api("/api/progress/reset-all", {
+          method: "POST",
+          body: {}
+        });
+        localStorage.removeItem(STORAGE_KEY);
+        state.view = "home";
+        state.currentDay = 1;
+        state.init = null;
+        state.today = null;
+        state.learn = null;
+        state.session = null;
+        state.gameType = "quiz";
+        state.questionIndex = 0;
+        state.answered = false;
+        state.lastFeedback = null;
+        state.lastAnswerMeta = null;
+        state.result = null;
+        state.matchState = defaultMatchState();
+        state.scoreState = {
+          correctCount: 0,
+          comboCount: 0,
+          rescuedCount: 0,
+          levelStep: 0
+        };
+        state.rewardBurst = null;
+        state.resultCelebrated = false;
+        await loadBase();
+        persistRuntime();
+        renderHome();
       }
 
       function escapeHtml(value) {
@@ -1153,12 +1495,162 @@ export function renderWebAppPage() {
           body;
       }
 
+      function getSummaryActionMarkup(summary) {
+        if (!summary) return "";
+        if (summary.nextAction === "wrongReview") {
+          return '<button class="btn primary" type="button" data-view-target="wrongbook">去错题本</button>';
+        }
+        return '<button class="btn primary" type="button" data-start="quiz">再来一轮</button>';
+      }
+
+      function renderSessionSummaryCard(summary, options) {
+        if (!summary) return "";
+        const secondaryActionMarkup = options?.secondaryActionMarkup === undefined
+          ? '<button class="btn" type="button" data-view-target="parent">看家长看板</button>'
+          : options.secondaryActionMarkup;
+
+        const metaItems = [
+          { label: "训练方式", value: summary.modeLabel || "训练" },
+          { label: "完成时间", value: summary.completedAtLabel || "--" },
+          { label: "用时", value: summary.durationLabel || "--" }
+        ];
+        const insights = [
+          {
+            title: "本轮掌握",
+            text: summary.masteredText || "这轮先把节奏稳住了",
+            tone: "tone-mint"
+          },
+          {
+            title: "还要再看",
+            text: summary.weakText || "没有新增薄弱项",
+            tone: "tone-coral"
+          }
+        ];
+
+        return (
+          '<div class="summary-card">' +
+            '<div class="summary-head">' +
+              '<div>' +
+                '<div class="pill">最近一次训练</div>' +
+                '<h2>' + escapeHtml(summary.summaryText || "最近完成了一轮训练") + '</h2>' +
+                '<p>' + escapeHtml(summary.nextActionLabel || "继续今天的下一轮") + '</p>' +
+              '</div>' +
+              '<div class="summary-score"><strong>' + escapeHtml(String(summary.accuracyPercent || 0)) + '%</strong><span>正确率</span></div>' +
+            '</div>' +
+            '<div class="summary-meta-grid">' +
+              metaItems.map((item) =>
+                '<div class="summary-meta-item"><span>' + escapeHtml(item.label) + '</span><strong>' + escapeHtml(item.value) + '</strong></div>'
+              ).join("") +
+            '</div>' +
+            '<div class="summary-insight-grid">' +
+              insights.map((item) =>
+                '<div class="insight-box ' + item.tone + '"><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.text) + '</p></div>'
+              ).join("") +
+            '</div>' +
+            '<div class="summary-actions">' +
+              getSummaryActionMarkup(summary) +
+              (secondaryActionMarkup || "") +
+            '</div>' +
+          '</div>'
+        );
+      }
+
+      function renderRecentSessionsList(items) {
+        if (!items?.length) {
+          return '<div class="empty">最近还没有训练记录，先完成一轮就会沉淀在这里。</div>';
+        }
+
+        return (
+          '<div class="session-mini-list">' +
+            items.map((item) =>
+              '<div class="session-mini-row">' +
+                '<div><strong>' + escapeHtml(item.modeLabel + " · " + item.correctCount + " / " + item.totalQuestions + " 题") + '</strong>' +
+                '<span>' + escapeHtml((item.completedAtLabel || "") + " · " + (item.durationLabel || "")) + '</span></div>' +
+                '<div class="session-mini-badge">' + escapeHtml(String(item.accuracyPercent || 0)) + '%</div>' +
+              '</div>'
+            ).join("") +
+          '</div>'
+        );
+      }
+
+      function joinLabels(items, emptyText) {
+        return items?.length ? items.join("、") : emptyText;
+      }
+
+      function getMaxMinutes(practiceTrend) {
+        return Math.max(1, ...(practiceTrend || []).map((item) => item.minutes || 0));
+      }
+
+      function renderPracticeTrendChart(practiceTrend) {
+        if (!practiceTrend?.length) {
+          return '<div class="empty">本周还没有训练数据。</div>';
+        }
+
+        const maxMinutes = getMaxMinutes(practiceTrend);
+
+        return (
+          '<div class="trend-chart">' +
+            practiceTrend.map((item) => {
+              const height = Math.max(8, Math.round(((item.minutes || 0) / maxMinutes) * 100));
+              const barClass = item.minutes > 0 ? "trend-bar practice" : "trend-bar practice is-empty";
+              const valueText = item.minutes > 0
+                ? item.minutes + " 分钟 · " + (item.accuracyPercent || 0) + "%"
+                : "休息";
+
+              return (
+                '<div class="trend-col">' +
+                  '<div class="trend-col-value">' + escapeHtml(valueText) + '</div>' +
+                  '<div class="trend-bar-shell"><div class="' + barClass + '" style="height:' + height + '%"></div></div>' +
+                  '<div class="trend-col-label">' + escapeHtml(item.label || "--") + '</div>' +
+                '</div>'
+              );
+            }).join("") +
+          '</div>'
+        );
+      }
+
+      function renderWrongTrendRows(wrongTrend) {
+        if (!wrongTrend?.length) {
+          return '<div class="empty">还没有错题趋势数据。</div>';
+        }
+
+        const maxCount = Math.max(
+          1,
+          ...wrongTrend.map((item) => (item.addedCount || 0) + (item.resolvedCount || 0))
+        );
+
+        return (
+          '<div class="trend-rows">' +
+            wrongTrend.map((item) => {
+              const total = (item.addedCount || 0) + (item.resolvedCount || 0);
+              const addedWidth = total > 0 ? Math.max(10, Math.round(((item.addedCount || 0) / maxCount) * 100)) : 0;
+              const resolvedWidth = total > 0 ? Math.max(10, Math.round(((item.resolvedCount || 0) / maxCount) * 100)) : 0;
+
+              return (
+                '<div class="trend-row">' +
+                  '<div class="trend-row-head"><strong>' + escapeHtml(item.label || "--") + '</strong><span class="pill">待消化 ' + escapeHtml(String(item.pendingCount || 0)) + ' 题</span></div>' +
+                  '<div class="trend-inline-track">' +
+                    '<div class="trend-inline-bars">' +
+                      '<div class="trend-inline-bar added" style="width:' + addedWidth + '%"></div>' +
+                      '<div class="trend-inline-bar resolved" style="width:' + resolvedWidth + '%"></div>' +
+                    '</div>' +
+                    '<span class="tiny-pill">新增 ' + escapeHtml(String(item.addedCount || 0)) + ' · 消化 ' + escapeHtml(String(item.resolvedCount || 0)) + '</span>' +
+                  '</div>' +
+                '</div>'
+              );
+            }).join("") +
+          '</div>'
+        );
+      }
+
       function renderHome() {
         setView("home");
         setActive("home");
         const progress = state.today?.todayProgress || 0;
         const stars = state.init?.progress?.stars || [];
         const tasks = state.today?.todayTasks || [];
+        const latestSessionSummary = state.today?.latestSessionSummary || null;
+        const recentSessions = state.today?.recentSessions || [];
         const resumeMeta = getResumeMeta();
         const resumeHtml = resumeMeta
           ? '<div class="resume-card"><div class="row-title">继续上次训练</div><p>' +
@@ -1183,15 +1675,21 @@ export function renderWebAppPage() {
           "口诀小勇士",
           state.today?.dayTitle || "今日训练",
           resumeHtml +
+          renderSessionSummaryCard(latestSessionSummary) +
           '<div class="hero-card">' +
-            '<div class="pill">今天完成度 ' + progress + "%</div>" +
+            '<div class="hero-top"><div class="pill">今天完成度 ' + progress + '%</div><div class="pill">今日建议</div></div>' +
+            '<span class="hero-title">今天做一轮短练习，把口诀记稳一点</span>' +
+            '<span class="hero-subtitle">' + escapeHtml(state.today?.todaySuggestion || "从今天的主练习开始，先读口诀，再做一轮小题。") + '</span>' +
             '<div class="progress"><div class="progress-bar" style="width:' + progress + '%"></div></div>' +
           "</div>" +
           '<div class="grid two">' +
             '<div class="card"><h2>今日任务</h2><div class="task-list">' + taskHtml + "</div></div>" +
             '<div class="card"><h2>7 天完成日历</h2><div class="calendar-row">' + calendar + "</div></div>" +
+          '</div><div class="grid two" style="margin-top:14px">' +
+            '<div class="card"><h2>最近几次训练</h2>' + renderRecentSessionsList(recentSessions) + '</div>' +
+            '<div class="card"><h2>现在最适合做什么</h2><p>' + escapeHtml(latestSessionSummary?.nextActionLabel || "先开始今天这一轮，练习会自动沉淀到首页。") + '</p><p class="support-note">' + escapeHtml(latestSessionSummary?.rewardTitle ? "上一轮奖励：" + latestSessionSummary.rewardTitle : "完成后会自动生成训练摘要和趋势。") + "</p></div>" +
           "</div>",
-          '<button class="btn primary" type="button" data-start="learn">开始今天练习</button>'
+          '<button class="btn primary" type="button" data-start="learn">开始今天练习</button><button class="btn" type="button" data-reset-learning>从头开始学习</button>'
         );
       }
 
@@ -1629,22 +2127,50 @@ export function renderWebAppPage() {
         setActive("parent");
         const dashboard = await api("/api/parent/dashboard");
         persistRuntime();
+        const latestSessionSummary = dashboard.latestSessionSummary || null;
+        const practiceOverview = dashboard.practiceOverview || {};
+        const wrongOverview = dashboard.wrongOverview || {};
         const wrong = dashboard.topWrongItems.length
           ? dashboard.topWrongItems.map((item) => '<div class="list-row"><div class="row-title">' + escapeHtml(item.formula) + '</div><span class="pill">错 ' + item.wrongCount + " 次</span></div>").join("")
           : '<div class="empty">暂时没有明显高频错题。</div>';
         renderShell(
           "家长看板",
-          "只看时长、掌握层次和高频错题。",
+          "连续训练、错题变化和最近一次训练沉淀都放在这里。",
           '<div class="grid four">' +
             '<div class="card"><h3>今日分钟</h3><h2>' + dashboard.todayMinutes + "</h2></div>" +
             '<div class="card"><h3>累计分钟</h3><h2>' + dashboard.totalMinutes + "</h2></div>" +
             '<div class="card"><h3>连续天数</h3><h2>' + dashboard.continuousDays + "</h2></div>" +
             '<div class="card"><h3>薄弱组</h3><h2>' + dashboard.weakTables.length + "</h2></div>" +
           "</div>" +
+          renderSessionSummaryCard(latestSessionSummary, {
+            secondaryActionMarkup: '<button class="btn" type="button" data-view-target="home">回首页</button>'
+          }) +
           '<div class="grid two" style="margin-top:14px">' +
-            '<div class="card"><h2>掌握情况</h2><p>已掌握：' + dashboard.masteredTables.join("、") + "</p><p>学习中：" + dashboard.learningTables.join("、") + "</p><p>薄弱项：" + dashboard.weakTables.join("、") + "</p></div>" +
+            '<div class="trend-card">' +
+              '<div class="trend-head"><div><div class="pill">连续训练趋势</div><h2>最近 7 天练习节奏</h2><p>看每一天练了多久、做了几轮、正确率大概到哪里。</p></div></div>' +
+              '<div class="metric-grid">' +
+                '<div class="metric-item"><span>本周练习</span><strong>' + escapeHtml(String(practiceOverview.totalMinutes || 0)) + ' 分钟</strong></div>' +
+                '<div class="metric-item"><span>活跃天数</span><strong>' + escapeHtml(String(practiceOverview.activeDays || 0)) + ' 天</strong></div>' +
+                '<div class="metric-item"><span>平均正确率</span><strong>' + escapeHtml(String(practiceOverview.averageAccuracyPercent || 0)) + '%</strong></div>' +
+              '</div>' +
+              renderPracticeTrendChart(dashboard.practiceTrend || []) +
+            '</div>' +
+            '<div class="trend-card">' +
+              '<div class="trend-head"><div><div class="pill">错题变化趋势</div><h2>最近 7 天错题增减</h2><p>新增多少，消化多少，待处理还剩多少。</p></div></div>' +
+              '<div class="metric-grid">' +
+                '<div class="metric-item"><span>当前待处理</span><strong>' + escapeHtml(String(wrongOverview.pendingCount || 0)) + ' 题</strong></div>' +
+                '<div class="metric-item"><span>本周新增</span><strong>' + escapeHtml(String(wrongOverview.addedThisWeek || 0)) + ' 题</strong></div>' +
+                '<div class="metric-item"><span>本周消化</span><strong>' + escapeHtml(String(wrongOverview.resolvedThisWeek || 0)) + ' 题</strong></div>' +
+              '</div>' +
+              renderWrongTrendRows(dashboard.wrongTrend || []) +
+            '</div>' +
+          '</div>' +
+          '<div class="grid two" style="margin-top:14px">' +
+            '<div class="card"><h2>掌握情况</h2><p>已掌握：' + escapeHtml(joinLabels(dashboard.masteredTables, "还在起步阶段")) + "</p><p>学习中：" + escapeHtml(joinLabels(dashboard.learningTables, "暂未安排")) + "</p><p>薄弱项：" + escapeHtml(joinLabels(dashboard.weakTables, "暂时没有")) + "</p></div>" +
             '<div class="card"><h2>高频错题</h2><div class="list-stack">' + wrong + "</div></div>" +
-          '</div><div class="card" style="margin-top:14px"><h2>明日建议</h2><p>' + escapeHtml(dashboard.tomorrowSuggestion) + "</p></div>"
+          '</div><div class="grid two" style="margin-top:14px">' +
+            '<div class="card"><h2>最近训练沉淀</h2>' + renderRecentSessionsList(dashboard.recentSessions || []) + '</div>' +
+            '<div class="card"><h2>明日建议</h2><p>' + escapeHtml(dashboard.tomorrowSuggestion) + "</p></div></div>"
         );
       }
 
@@ -1787,6 +2313,7 @@ export function renderWebAppPage() {
         if (target.hasAttribute("data-listen-question")) playQuestionAudio();
         if (target.hasAttribute("data-listen-feedback")) playFeedbackAudio();
         if (target.hasAttribute("data-play-match-audio")) playRewardAudio("match");
+        if (target.hasAttribute("data-reset-learning")) resetLearning();
       });
 
       async function boot() {

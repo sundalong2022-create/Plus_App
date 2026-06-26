@@ -670,7 +670,8 @@ function renderHomePage() {
         <h1>把乘法口诀练成每天愿意打开的 10 分钟小习惯。</h1>
         <p>面向一年级小朋友的乘法口诀训练产品，把新口诀学习、闯关答题、错题救援、奖励反馈和家长看板连成一条轻量主线。孩子不会被内容淹没，家长也不用盯很多复杂数据。</p>
         <div class="actions">
-          <a class="btn primary" href="#demo">立即试玩</a>
+          <a class="btn primary" href="/app">进入 Web 应用</a>
+          <a class="btn" href="#demo">先看演示</a>
           <a class="btn" href="/docs">查看接口文档</a>
           <a class="btn ghost" href="/health">服务状态</a>
         </div>
@@ -688,6 +689,7 @@ function renderHomePage() {
             <span>只盯时长、掌握层次和高频错题，不必看大表格。</span>
           </div>
         </div>
+        <p style="margin-top:4px;">想直接体验完整浏览器训练版，可以从这里进入 Web 应用。</p>
       </div>
 
       <aside class="hero-side" aria-label="product preview">
@@ -724,6 +726,13 @@ function renderHomePage() {
             </div>
           </div>
         </div>
+        <a class="card-link" href="/app">
+          <div class="card">
+          <span class="label sky">Web 应用</span>
+          <h3>直接进入浏览器训练版</h3>
+          <p>包含首页、练习、错题本、训练摘要和家长看板，适合直接跑完整演示。</p>
+          </div>
+        </a>
         <a class="card-link" href="/guide#parents">
           <div class="card">
           <span class="label mint">家长看板</span>
