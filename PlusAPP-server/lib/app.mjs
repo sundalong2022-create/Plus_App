@@ -320,7 +320,24 @@ function getTokenFromRequest(req) {
 function requireSession(req, res) {
   const token = getTokenFromRequest(req);
 
-  if (!token || !sessions.has(token)) {
+  if (!token) {
+    sendJson(res, 401, { ok: false, error: { message: "Unauthorized" } });
+    return null;
+  }
+
+  if (!sessions.has(token) && LOGIN_MODE === "mock") {
+    const session = {
+      token,
+      openid: createMockOpenId(token),
+      sessionKey: "mock_session_key",
+      unionid: "",
+      loginAt: new Date().toISOString()
+    };
+
+    sessions.set(token, session);
+  }
+
+  if (!sessions.has(token)) {
     sendJson(res, 401, { ok: false, error: { message: "Unauthorized" } });
     return null;
   }
